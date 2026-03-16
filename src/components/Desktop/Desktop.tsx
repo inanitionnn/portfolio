@@ -8,6 +8,7 @@ import { Window } from '../Window/Window';
 import { DesktopIcon } from './DesktopIcon';
 import { ContextMenu } from '../ContextMenu/ContextMenu';
 import { ErrorDialog } from '../ErrorDialog/ErrorDialog';
+import { Clippy } from '../Clippy/Clippy';
 import { renderApp } from '../../utils/registry';
 import { TASKBAR_HEIGHT } from '../../utils/constants';
 import styles from './Desktop.module.css';
@@ -81,6 +82,8 @@ export const Desktop = () => {
           }}
         />
       ))}
+
+      <Clippy />
 
       {propertiesOpen && (
         <div className={styles.propertiesOverlay} onClick={() => setPropertiesOpen(false)}>
