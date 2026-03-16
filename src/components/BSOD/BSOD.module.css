@@ -3,29 +3,54 @@
   inset: 0;
   background-color: #0000aa;
   color: #ffffff;
-  font-family: 'Courier New', Consolas, monospace;
-  font-size: 16px;
-  line-height: 1.6;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
-  cursor: default;
+  cursor: pointer;
   user-select: none;
 }
 
 .content {
-  width: 640px;
-  max-width: 90vw;
+  max-width: 640px;
+  width: 90%;
+  line-height: 1.6;
 }
 
-.line {
-  white-space: pre-wrap;
-  min-height: 1.6em;
+.header {
+  background-color: #aaaaaa;
+  color: #0000aa;
+  text-align: center;
+  padding: 2px 8px;
+  margin-bottom: 24px;
+  display: inline-block;
+}
+
+.body {
+  margin-bottom: 20px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px 0;
+}
+
+.list li {
+  margin-bottom: 12px;
+}
+
+.list li::before {
+  content: '* ';
+}
+
+.prompt {
+  margin-top: 8px;
 }
 
 .cursor {
-  display: inline;
   animation: blink 1s step-end infinite;
 }
 

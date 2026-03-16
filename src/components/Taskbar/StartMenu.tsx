@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useWindowStore } from '../../store/windowStore';
+import { useErrorStore } from '../../store/errorStore';
 import { appIconMap } from '../../utils/iconMap';
+import { funnyErrors } from '../../data/errorMessages';
 import { INITIAL_DESKTOP_ICONS } from '../../data/desktopItems';
 import { ShutdownDialog } from './ShutdownDialog';
 import { useSoundEffect } from '../../hooks/useSoundEffect';
@@ -20,6 +22,7 @@ export const StartMenu = ({ isOpen, onClose }: StartMenuProps) => {
   const [isShutdownOpen, setIsShutdownOpen] = useState(false);
 
   const openWindow = useWindowStore((s) => s.openWindow);
+  const showError = useErrorStore((s) => s.showError);
   const playClick = useSoundEffect('/sounds/click.mp3');
 
   useEffect(() => {
@@ -51,7 +54,15 @@ export const StartMenu = ({ isOpen, onClose }: StartMenuProps) => {
 
   const handleProgramClick = (item: (typeof PROGRAMS)[number]) => {
     playClick();
-    openWindow(item.appId, item.label, item.appId);
+
+    if (item.appId === 'errorTrigger') {
+      const key = item.meta?.errorKey as string | undefined;
+      const entry = key ? funnyErrors[key] : undefined;
+      if (entry) showError(entry.title, entry.message, entry.icon, entry.buttons);
+    } else {
+      openWindow(item.appId, item.label, item.appId);
+    }
+
     onClose();
   };
 

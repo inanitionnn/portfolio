@@ -7,7 +7,7 @@ import { type IconType } from '../../types/errorDialog';
 import styles from './ErrorDialog.module.css';
 
 const DIALOG_WIDTH = 400;
-const DIALOG_Z_INDEX = 9000;
+const DIALOG_Z_INDEX = 10000;
 
 interface ErrorDialogProps {
   id: string;

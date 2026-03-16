@@ -2,111 +2,22 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-height: 200px;
 }
 
-.menuBar {
-  display: flex;
-  flex-shrink: 0;
-  background: #c0c0c0;
-  border-bottom: 1px solid #808080;
-}
-
-.menuItem {
-  position: relative;
-}
-
-.menuButton {
-  background: transparent;
-  border: 1px solid transparent;
-  padding: 2px 8px;
-  font-family: 'MS Sans Serif', Arial, sans-serif;
-  font-size: 12px;
-  color: #000;
-  cursor: default;
-  outline: none;
-  white-space: nowrap;
-}
-
-.menuButton:hover {
-  background: #000080;
-  color: #fff;
-}
-
-.menuButtonActive {
-  background: #000080;
-  color: #fff;
-  border-color: #808080 #fff #fff #808080;
-}
-
-.dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  background: #c0c0c0;
-  border-top: 1px solid #fff;
-  border-left: 1px solid #fff;
-  border-right: 2px solid #808080;
-  border-bottom: 2px solid #808080;
-  box-shadow: 1px 1px 0 #000;
-  min-width: 140px;
-  padding: 2px;
-}
-
-.dropdownItem {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  background: transparent;
-  border: none;
-  padding: 3px 16px 3px 8px;
-  font-family: 'MS Sans Serif', Arial, sans-serif;
-  font-size: 12px;
-  color: #000;
-  text-align: left;
-  cursor: default;
-  white-space: nowrap;
-  outline: none;
-}
-
-.dropdownItem:hover {
-  background: #000080;
-  color: #fff;
-}
-
-.dropdownSeparator {
-  height: 1px;
-  background: #808080;
-  margin: 2px 4px;
-  border-bottom: 1px solid #fff;
-}
-
-.hotkey {
-  margin-left: 24px;
-  color: inherit;
-  opacity: 0.8;
-}
-
-.checkmark {
-  display: inline-block;
-  width: 16px;
-  margin-right: 2px;
-  text-align: center;
-}
-
-.textarea {
+.editor {
   flex: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
   resize: none;
   border: none;
   outline: none;
-  font-family: Consolas, 'Courier New', Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 13px;
-  line-height: 1.5;
-  background: #fff;
-  color: #000;
   padding: 4px;
-  overflow: auto;
-  cursor: text;
+  background: #ffffff;
+  color: #000000;
+  line-height: 1.5;
   box-sizing: border-box;
 }

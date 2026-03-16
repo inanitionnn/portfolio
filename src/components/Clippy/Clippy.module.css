@@ -1,174 +1,120 @@
-@keyframes slideIn {
-  from {
-    transform: translateY(120px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideOut {
-  from {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  to {
-    transform: translateY(120px);
-    opacity: 0;
-  }
-}
-
-@keyframes idle {
-
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-@keyframes bounce {
-  0% {
-    transform: translateY(0);
-  }
-
-  35% {
-    transform: translateY(-9px);
-  }
-
-  65% {
-    transform: translateY(-9px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.wrapper {
+.container {
   position: fixed;
   bottom: 50px;
   right: 16px;
-  z-index: 9999;
+  z-index: 9000;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 6px;
+  gap: 8px;
   pointer-events: none;
 }
 
-.wrapper.visible {
-  animation: slideIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  pointer-events: auto;
-}
-
-/* Bubble */
 .bubble {
-  position: relative;
-  background: #fff;
-  border: 1.5px solid #000;
-  padding: 8px 28px 8px 10px;
+  pointer-events: all;
+  background: #ffffc0;
+  border: 2px solid #000;
+  border-radius: 4px;
+  padding: 8px 10px;
   max-width: 220px;
-  min-width: 140px;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
   font-size: 11px;
-  line-height: 1.4;
-  font-family: 'Microsoft Sans Serif', 'Tahoma', sans-serif;
-  box-shadow: 2px 2px 0 #000;
-  animation: fadeIn 0.25s ease forwards;
-  pointer-events: auto;
-  word-break: break-word;
+  position: relative;
+  box-shadow: 2px 2px 0 #888;
 }
 
-/* Comic-style tail pointing down-right */
 .bubble::after {
   content: '';
   position: absolute;
   bottom: -10px;
-  right: 18px;
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 10px solid #000;
+  right: 20px;
+  border-width: 10px 8px 0;
+  border-style: solid;
+  border-color: #000 transparent transparent;
 }
 
 .bubble::before {
   content: '';
   position: absolute;
-  bottom: -8px;
-  right: 19px;
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 9px solid #fff;
+  bottom: -7px;
+  right: 21px;
+  border-width: 9px 7px 0;
+  border-style: solid;
+  border-color: #ffffc0 transparent transparent;
   z-index: 1;
 }
 
 .closeBtn {
   position: absolute;
-  top: 3px;
-  right: 3px;
-  width: 16px;
-  height: 16px;
-  border: 1px solid #888;
-  background: #d4d0c8;
+  top: 2px;
+  right: 4px;
+  background: none;
+  border: none;
   font-size: 10px;
-  line-height: 1;
   cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.text {
+  margin: 0 16px 8px 0;
+  line-height: 1.4;
+}
+
+.bubbleButtons {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.bubbleButtons button {
+  font-size: 10px;
+  padding: 2px 6px;
+  cursor: pointer;
+}
+
+.clippyBtn {
+  pointer-events: all;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 42px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  font-family: 'Microsoft Sans Serif', 'Tahoma', sans-serif;
 }
 
-.closeBtn:hover {
-  background: #c0c0c0;
-  border-color: #555;
+.clippyBody {
+  width: 28px;
+  height: 44px;
+  background: #c8a840;
+  border-radius: 4px 4px 2px 2px;
+  position: relative;
+  border: 2px solid #7a6520;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
-.closeBtn:active {
-  background: #a0a0a0;
+.clippyEyes {
+  display: flex;
+  gap: 6px;
 }
 
-/* Character */
-.character {
-  font-size: 52px;
-  line-height: 1;
-  cursor: pointer;
-  user-select: none;
-  animation: idle 3s ease-in-out infinite;
-  pointer-events: auto;
-  display: block;
-  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.2));
+.eye {
+  width: 5px;
+  height: 5px;
+  background: #222;
+  border-radius: 50%;
 }
 
-.character:hover {
-  animation: none;
-  transform: scale(1.1);
-  transition: transform 0.15s ease;
-}
-
-.character.bouncing {
-  animation: bounce 0.45s ease;
+.clippyMouth {
+  width: 12px;
+  height: 3px;
+  border-bottom: 2px solid #7a6520;
+  border-radius: 0 0 4px 4px;
 }

@@ -2,39 +2,45 @@ import { useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useUiStore } from '../../store/uiStore';
 import { useErrorStore } from '../../store/errorStore';
-import { type ShutdownMode } from '../../types/shutdown';
 import styles from './ShutdownDialog.module.css';
+
+type DialogOption = 'shutdown' | 'restart' | 'standby';
 
 interface ShutdownDialogProps {
   onClose: () => void;
 }
 
 export const ShutdownDialog = ({ onClose }: ShutdownDialogProps) => {
-  const [selected, setSelected] = useState<Exclude<ShutdownMode, 'off'>>('shutdown');
+  const [selected, setSelected] = useState<DialogOption>('restart');
+
   const { setShutdownMode, setAppPhase } = useUiStore(
     useShallow((s) => ({
       setShutdownMode: s.setShutdownMode,
       setAppPhase: s.setAppPhase,
     })),
   );
+
   const showError = useErrorStore((s) => s.showError);
 
   const handleOk = () => {
-    onClose();
-
-    if (selected === 'restart') {
-      setShutdownMode('restart');
-      setAppPhase('shuttingDown');
+    if (selected === 'standby') {
+      showError(
+        'Stand By',
+        'Stand by mode is not supported on this computer.\n\nPlease try turning it off and on again.',
+        'warning',
+        ['OK'],
+      );
+      onClose();
       return;
     }
+
+    onClose();
 
     if (selected === 'shutdown') {
       setAppPhase('bsod');
-      return;
-    }
-
-    if (selected === 'standby') {
-      showError('Stand By', 'Stand by is not supported on this computer.');
+    } else {
+      setShutdownMode('restart');
+      setAppPhase('shuttingDown');
     }
   };
 
@@ -49,21 +55,18 @@ export const ShutdownDialog = ({ onClose }: ShutdownDialogProps) => {
         </div>
         <div className={`window-body ${styles.body}`}>
           <div className={styles.topRow}>
-            <img src="/shutdown-icon.png" alt="" className={styles.icon} onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+            <img
+              src="/shutdown-icon.png"
+              alt=""
+              className={styles.icon}
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
+            />
             <p className={styles.question}>What do you want the computer to do?</p>
           </div>
 
           <div className={styles.options}>
-            <label className={styles.option}>
-              <input
-                type="radio"
-                name="shutdownMode"
-                value="shutdown"
-                checked={selected === 'shutdown'}
-                onChange={() => setSelected('shutdown')}
-              />
-              Shut down the computer
-            </label>
             <label className={styles.option}>
               <input
                 type="radio"
@@ -73,6 +76,16 @@ export const ShutdownDialog = ({ onClose }: ShutdownDialogProps) => {
                 onChange={() => setSelected('restart')}
               />
               Restart the computer
+            </label>
+            <label className={styles.option}>
+              <input
+                type="radio"
+                name="shutdownMode"
+                value="shutdown"
+                checked={selected === 'shutdown'}
+                onChange={() => setSelected('shutdown')}
+              />
+              Shut down the computer
             </label>
             <label className={styles.option}>
               <input

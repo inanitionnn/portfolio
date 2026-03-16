@@ -12,6 +12,7 @@ export const appIconMap: Partial<Record<AppId, IconComponent>> = {
   about: Notepad,
   notepad: Notepad2,
   projectViewer: Write1,
+  errorTrigger: Progman1,
 };
 
 export const namedIconMap: Record<string, IconComponent> = {

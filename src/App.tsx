@@ -3,12 +3,15 @@ import { ThemeProvider, StyleSheetManager, createGlobalStyle } from 'styled-comp
 import { styleReset } from 'react95';
 import original from 'react95/dist/themes/original';
 import { useUiStore } from './store/uiStore';
+import { useErrorStore } from './store/errorStore';
 import { Desktop } from './components/Desktop/Desktop';
 import { Taskbar } from './components/Taskbar/Taskbar';
 import { BootScreen } from './components/Boot/BootScreen';
 import { ShutdownScreen } from './components/ShutdownScreen/ShutdownScreen';
-import { BSOD } from './components/BSOD/BSOD';
 import { MobileHint } from './components/MobileHint/MobileHint';
+import { BSOD } from './components/BSOD/BSOD';
+import { Clippy } from './components/Clippy/Clippy';
+import { ErrorDialog } from './components/ErrorDialog/ErrorDialog';
 import './App.css';
 
 const GlobalStyles = createGlobalStyle`
@@ -20,6 +23,9 @@ function App() {
   const setAppPhase = useUiStore((s) => s.setAppPhase);
   const setShutdownMode = useUiStore((s) => s.setShutdownMode);
 
+  const errors = useErrorStore((s) => s.errors);
+  const dismissError = useErrorStore((s) => s.dismissError);
+
   const handleBootComplete = useCallback(() => {
     setAppPhase('desktop');
   }, [setAppPhase]);
@@ -30,9 +36,8 @@ function App() {
   }, [setAppPhase, setShutdownMode]);
 
   const handleBsodDismiss = useCallback(() => {
-    setShutdownMode('off');
     setAppPhase('booting');
-  }, [setAppPhase, setShutdownMode]);
+  }, [setAppPhase]);
 
   return (
     <StyleSheetManager shouldForwardProp={(prop) => !['variant', 'shadow'].includes(prop)}>
@@ -48,6 +53,14 @@ function App() {
             <Desktop />
             <Taskbar />
             <MobileHint />
+            <Clippy />
+            {errors.map((err) => (
+              <ErrorDialog
+                key={err.id}
+                {...err}
+                onClose={() => dismissError(err.id)}
+              />
+            ))}
           </>
         )}
 

@@ -33,6 +33,8 @@ export interface DesktopIconData {
   meta?: Record<string, unknown>;
 }
 
+export type { ErrorDialogData, IconType } from './errorDialog';
+
 export interface Project {
   id: string;
   name: string;

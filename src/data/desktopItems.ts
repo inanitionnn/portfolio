@@ -44,12 +44,21 @@ export const INITIAL_DESKTOP_ICONS: DesktopIconData[] = [
     appId: 'notepad',
     position: { x: 10, y: 10 + ICON_GRID_SIZE * 5 },
   },
+  // Row 7 intentionally empty (visual gap)
+  {
+    id: 'minesweeper',
+    label: 'Minesweeper',
+    icon: 'minesweeper',
+    appId: 'errorTrigger',
+    position: { x: 10, y: 10 + ICON_GRID_SIZE * 7 },
+    meta: { errorKey: 'game' },
+  },
   {
     id: 'social-life',
     label: 'social_life.exe',
     icon: 'executable',
     appId: 'errorTrigger',
-    position: { x: 10, y: 10 + ICON_GRID_SIZE * 6 },
+    position: { x: 10, y: 10 + ICON_GRID_SIZE * 8 },
     meta: { errorKey: 'socialLife' },
   },
   {
@@ -57,15 +66,7 @@ export const INITIAL_DESKTOP_ICONS: DesktopIconData[] = [
     label: 'sleep_schedule.exe',
     icon: 'executable',
     appId: 'errorTrigger',
-    position: { x: 10, y: 10 + ICON_GRID_SIZE * 7 },
+    position: { x: 10, y: 10 + ICON_GRID_SIZE * 9 },
     meta: { errorKey: 'sleep' },
-  },
-  {
-    id: 'minesweeper',
-    label: 'Minesweeper',
-    icon: 'minesweeper',
-    appId: 'errorTrigger',
-    position: { x: 10, y: 10 + ICON_GRID_SIZE * 8 },
-    meta: { errorKey: 'game' },
   },
 ];
