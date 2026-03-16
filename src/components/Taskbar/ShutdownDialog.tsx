@@ -9,11 +9,15 @@ interface ShutdownDialogProps {
 
 export const ShutdownDialog = ({ onClose }: ShutdownDialogProps) => {
   const [selected, setSelected] = useState<Exclude<ShutdownMode, 'off'>>('shutdown');
-  const setShutdownMode = useUiStore((s) => s.setShutdownMode);
+  const { setShutdownMode, setAppPhase } = useUiStore((s) => ({
+    setShutdownMode: s.setShutdownMode,
+    setAppPhase: s.setAppPhase,
+  }));
 
   const handleOk = () => {
     onClose();
     setShutdownMode(selected);
+    setAppPhase('shuttingDown');
   };
 
   return (
