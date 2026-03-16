@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import { useSettingsStore } from '../../store/settingsStore';
 import styles from './SystemTray.module.css';
 
@@ -10,10 +11,12 @@ const formatTime = (date: Date): string => {
 
 export const SystemTray = () => {
   const [time, setTime] = useState(() => formatTime(new Date()));
-  const { soundEnabled, toggleSound } = useSettingsStore((s) => ({
-    soundEnabled: s.soundEnabled,
-    toggleSound: s.toggleSound,
-  }));
+  const { soundEnabled, toggleSound } = useSettingsStore(
+    useShallow((s) => ({
+      soundEnabled: s.soundEnabled,
+      toggleSound: s.toggleSound,
+    })),
+  );
 
   useEffect(() => {
     const tick = () => setTime(formatTime(new Date()));

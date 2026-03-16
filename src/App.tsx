@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, StyleSheetManager, createGlobalStyle } from 'styled-components';
 import { styleReset } from 'react95';
-import { createGlobalStyle } from 'styled-components';
 import original from 'react95/dist/themes/original';
 import { useUiStore } from './store/uiStore';
 import { Desktop } from './components/Desktop/Desktop';
@@ -29,24 +28,26 @@ function App() {
   }, [setAppPhase, setShutdownMode]);
 
   return (
-    <ThemeProvider theme={original}>
-      <GlobalStyles />
+    <StyleSheetManager shouldForwardProp={(prop) => !['variant', 'shadow'].includes(prop)}>
+      <ThemeProvider theme={original}>
+        <GlobalStyles />
 
-      {appPhase === 'booting' && (
-        <BootScreen onBootComplete={handleBootComplete} />
-      )}
+        {appPhase === 'booting' && (
+          <BootScreen onBootComplete={handleBootComplete} />
+        )}
 
-      {appPhase === 'desktop' && (
-        <>
-          <Desktop />
-          <Taskbar />
-        </>
-      )}
+        {appPhase === 'desktop' && (
+          <>
+            <Desktop />
+            <Taskbar />
+          </>
+        )}
 
-      {appPhase === 'shuttingDown' && (
-        <ShutdownScreen onRestart={handleRestart} />
-      )}
-    </ThemeProvider>
+        {appPhase === 'shuttingDown' && (
+          <ShutdownScreen onRestart={handleRestart} />
+        )}
+      </ThemeProvider>
+    </StyleSheetManager>
   );
 }
 

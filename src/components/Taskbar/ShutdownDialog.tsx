@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import { useUiStore } from '../../store/uiStore';
 import { type ShutdownMode } from '../../types/shutdown';
 import styles from './ShutdownDialog.module.css';
@@ -9,10 +10,12 @@ interface ShutdownDialogProps {
 
 export const ShutdownDialog = ({ onClose }: ShutdownDialogProps) => {
   const [selected, setSelected] = useState<Exclude<ShutdownMode, 'off'>>('shutdown');
-  const { setShutdownMode, setAppPhase } = useUiStore((s) => ({
-    setShutdownMode: s.setShutdownMode,
-    setAppPhase: s.setAppPhase,
-  }));
+  const { setShutdownMode, setAppPhase } = useUiStore(
+    useShallow((s) => ({
+      setShutdownMode: s.setShutdownMode,
+      setAppPhase: s.setAppPhase,
+    })),
+  );
 
   const handleOk = () => {
     onClose();

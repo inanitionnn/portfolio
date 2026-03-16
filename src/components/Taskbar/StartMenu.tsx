@@ -14,15 +14,21 @@ const PROGRAMS = INITIAL_DESKTOP_ICONS.filter((item) => item.appId !== 'recycleB
 
 export const StartMenu = ({ isOpen, onClose }: StartMenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
+  const isShutdownOpenRef = useRef(false);
   const [isProgramsOpen, setIsProgramsOpen] = useState(false);
   const [isShutdownOpen, setIsShutdownOpen] = useState(false);
 
   const openWindow = useWindowStore((s) => s.openWindow);
 
   useEffect(() => {
+    isShutdownOpenRef.current = isShutdownOpen;
+  }, [isShutdownOpen]);
+
+  useEffect(() => {
     if (!isOpen) return;
 
     const handleMouseDown = (e: MouseEvent) => {
+      if (isShutdownOpenRef.current) return;
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         onClose();
       }
@@ -35,6 +41,7 @@ export const StartMenu = ({ isOpen, onClose }: StartMenuProps) => {
   useEffect(() => {
     if (!isOpen) {
       setIsProgramsOpen(false);
+      setIsShutdownOpen(false);
     }
   }, [isOpen]);
 
