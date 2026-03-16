@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { type DesktopIconData } from '../types';
+import { INITIAL_DESKTOP_ICONS } from '../data/desktopItems';
 
 interface DesktopStore {
   icons: DesktopIconData[];
@@ -13,7 +14,7 @@ interface DesktopStore {
 
 export const useDesktopStore = create<DesktopStore>()(
   immer((set) => ({
-    icons: [],
+    icons: INITIAL_DESKTOP_ICONS,
     recycleBinItems: [],
 
     moveIcon: (id, position) =>

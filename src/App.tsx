@@ -1,13 +1,20 @@
+import { ThemeProvider } from 'styled-components';
+import { styleReset } from 'react95';
+import { createGlobalStyle } from 'styled-components';
+import original from 'react95/dist/themes/original';
+import { Desktop } from './components/Desktop/Desktop';
 import './App.css';
+
+const GlobalStyles = createGlobalStyle`
+  ${styleReset}
+`;
 
 function App() {
   return (
-    <div
-      id="desktop"
-      style={{ width: '100%', height: '100vh', background: '#008080' }}
-    >
-      Win98 Portfolio
-    </div>
+    <ThemeProvider theme={original}>
+      <GlobalStyles />
+      <Desktop />
+    </ThemeProvider>
   );
 }
 

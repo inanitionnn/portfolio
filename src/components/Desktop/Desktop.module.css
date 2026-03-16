@@ -1,0 +1,9 @@
+.desktop {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #008080;
+  background-image: url('/wallpaper.png');
+  background-size: cover;
+  background-position: center;
+}
