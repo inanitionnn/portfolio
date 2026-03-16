@@ -4,6 +4,7 @@ import { type DesktopIconData } from '../../types';
 import { useDesktopStore } from '../../store/desktopStore';
 import { useWindowStore } from '../../store/windowStore';
 import { useContextMenu } from '../../hooks/useContextMenu';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import { ContextMenu } from '../ContextMenu/ContextMenu';
 import { appIconMap, recycleBinIconMap } from '../../utils/iconMap';
 import { ICON_GRID_SIZE } from '../../utils/constants';
@@ -28,6 +29,7 @@ export const DesktopIcon = ({ data, isSelected, onSelect }: DesktopIconProps) =>
 
   const { visible, x, y, items, showMenu, hideMenu } = useContextMenu();
   const [propertiesOpen, setPropertiesOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const nodeRef = useRef<HTMLDivElement>(null);
   const clickTimeRef = useRef<number>(0);
@@ -52,7 +54,7 @@ export const DesktopIcon = ({ data, isSelected, onSelect }: DesktopIconProps) =>
     e.stopPropagation();
 
     const now = Date.now();
-    const isDoubleClick = now - clickTimeRef.current < 400;
+    const isDoubleClick = now - clickTimeRef.current < 300;
     clickTimeRef.current = now;
 
     if (isDoubleClick) {
@@ -78,10 +80,11 @@ export const DesktopIcon = ({ data, isSelected, onSelect }: DesktopIconProps) =>
     <>
       <Draggable
         nodeRef={nodeRef as React.RefObject<HTMLElement>}
-        position={position}
+        position={isMobile ? { x: 0, y: 0 } : position}
         onStop={handleDragStop}
         grid={[ICON_GRID_SIZE, ICON_GRID_SIZE]}
         bounds="parent"
+        disabled={isMobile}
       >
         <div
           ref={nodeRef}

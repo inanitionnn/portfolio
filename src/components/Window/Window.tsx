@@ -1,11 +1,16 @@
-import { type ReactNode, useEffect } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { Rnd, type RndResizeCallback, type DraggableData } from 'react-rnd';
 import type { DraggableEvent } from 'react-draggable';
 import { useShallow } from 'zustand/react/shallow';
 import { useWindowStore, getActiveWindowId } from '../../store/windowStore';
 import { WindowContext } from '../../contexts/WindowContext';
 import { useSoundEffect } from '../../hooks/useSoundEffect';
+import { useIsMobile } from '../../hooks/useIsMobile';
+import { TASKBAR_HEIGHT } from '../../utils/constants';
 import styles from './Window.module.css';
+
+const MAX_WINDOW_WIDTH = 1600;
+const MAX_WINDOW_HEIGHT = 1200;
 
 interface WindowProps {
   id: string;
@@ -13,6 +18,9 @@ interface WindowProps {
 }
 
 export const Window = ({ id, children }: WindowProps) => {
+  const [isDragging, setIsDragging] = useState(false);
+  const isMobile = useIsMobile();
+
   const { position, size, zIndex, isMinimized, isMaximized, title, icon } =
     useWindowStore(
       useShallow((s) => {
@@ -52,7 +60,12 @@ export const Window = ({ id, children }: WindowProps) => {
       })),
     );
 
+  const handleDragStart = () => {
+    setIsDragging(true);
+  };
+
   const handleDragStop = (_e: DraggableEvent, d: DraggableData) => {
+    setIsDragging(false);
     updatePosition(id, { x: d.x, y: d.y });
   };
 
@@ -69,21 +82,30 @@ export const Window = ({ id, children }: WindowProps) => {
     }
   };
 
+  const mobilePosition = { x: 0, y: 0 };
+  const mobileSize = {
+    width: window.innerWidth,
+    height: window.innerHeight - TASKBAR_HEIGHT,
+  };
+
   return (
     <Rnd
-      position={position}
-      size={size}
+      position={isMobile ? mobilePosition : position}
+      size={isMobile ? mobileSize : size}
+      onDragStart={handleDragStart}
       onDragStop={handleDragStop}
       onResizeStop={handleResizeStop}
       dragHandleClassName="title-bar"
       bounds="parent"
       minWidth={200}
       minHeight={150}
-      disableDragging={isMaximized}
-      enableResizing={!isMaximized}
+      maxWidth={MAX_WINDOW_WIDTH}
+      maxHeight={MAX_WINDOW_HEIGHT}
+      disableDragging={isMaximized || isMobile}
+      enableResizing={!isMaximized && !isMobile}
       style={{ zIndex, display: isMinimized ? 'none' : 'block' }}
       onMouseDown={() => focusWindow(id)}
-      className={styles.rnd}
+      className={`${styles.rnd} ${isDragging ? styles.dragging : ''}`}
     >
       <div className={`window ${styles.window}`}>
         <div className={`title-bar ${!isActive ? styles.titleBarInactive : ''}`}>

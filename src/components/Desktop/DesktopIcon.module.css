@@ -9,6 +9,14 @@
   padding: 4px;
 }
 
+@media (max-width: 767px) {
+  .icon {
+    position: relative;
+    width: auto;
+    justify-content: center;
+  }
+}
+
 .icon:focus {
   outline: none;
 }

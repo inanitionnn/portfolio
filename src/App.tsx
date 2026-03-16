@@ -7,6 +7,7 @@ import { Desktop } from './components/Desktop/Desktop';
 import { Taskbar } from './components/Taskbar/Taskbar';
 import { BootScreen } from './components/Boot/BootScreen';
 import { ShutdownScreen } from './components/ShutdownScreen/ShutdownScreen';
+import { MobileHint } from './components/MobileHint/MobileHint';
 import './App.css';
 
 const GlobalStyles = createGlobalStyle`
@@ -40,6 +41,7 @@ function App() {
           <>
             <Desktop />
             <Taskbar />
+            <MobileHint />
           </>
         )}
 

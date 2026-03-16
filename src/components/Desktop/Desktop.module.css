@@ -8,6 +8,17 @@
   background-position: center;
 }
 
+@media (max-width: 767px) {
+  .desktop {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-content: start;
+    padding: 8px 4px;
+    gap: 4px;
+    overflow-y: auto;
+  }
+}
+
 .propertiesOverlay {
   position: fixed;
   inset: 0;
