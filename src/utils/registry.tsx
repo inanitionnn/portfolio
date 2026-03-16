@@ -9,6 +9,7 @@ const appComponents: Partial<Record<AppId, React.LazyExoticComponent<() => React
   recycleBin: lazy(() => import('../apps/RecycleBin/RecycleBinApp')),
   contact: lazy(() => import('../apps/Contact/ContactApp')),
   about: lazy(() => import('../apps/AboutNotepad/AboutNotepad')),
+  notepad: lazy(() => import('../apps/Notepad/NotepadApp')),
   projectViewer: lazy(() => import('../apps/ProjectViewer/ProjectViewer')),
 };
 

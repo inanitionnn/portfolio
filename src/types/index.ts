@@ -4,6 +4,7 @@ export type AppId =
   | 'recycleBin'
   | 'contact'
   | 'about'
+  | 'notepad'
   | 'projectViewer'
   | 'errorTrigger';
 

@@ -38,11 +38,18 @@ export const INITIAL_DESKTOP_ICONS: DesktopIconData[] = [
     position: { x: 10, y: 10 + ICON_GRID_SIZE * 4 },
   },
   {
+    id: 'icon-notepad',
+    label: 'Untitled \u2014 Notepad',
+    icon: 'notepad',
+    appId: 'notepad',
+    position: { x: 10, y: 10 + ICON_GRID_SIZE * 5 },
+  },
+  {
     id: 'social-life',
     label: 'social_life.exe',
     icon: 'executable',
     appId: 'errorTrigger',
-    position: { x: 10, y: 10 + ICON_GRID_SIZE * 5 },
+    position: { x: 10, y: 10 + ICON_GRID_SIZE * 6 },
     meta: { errorKey: 'socialLife' },
   },
   {
@@ -50,7 +57,7 @@ export const INITIAL_DESKTOP_ICONS: DesktopIconData[] = [
     label: 'sleep_schedule.exe',
     icon: 'executable',
     appId: 'errorTrigger',
-    position: { x: 10, y: 10 + ICON_GRID_SIZE * 6 },
+    position: { x: 10, y: 10 + ICON_GRID_SIZE * 7 },
     meta: { errorKey: 'sleep' },
   },
   {
@@ -58,7 +65,7 @@ export const INITIAL_DESKTOP_ICONS: DesktopIconData[] = [
     label: 'Minesweeper',
     icon: 'minesweeper',
     appId: 'errorTrigger',
-    position: { x: 10, y: 10 + ICON_GRID_SIZE * 7 },
+    position: { x: 10, y: 10 + ICON_GRID_SIZE * 8 },
     meta: { errorKey: 'game' },
   },
 ];
