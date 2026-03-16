@@ -37,4 +37,28 @@ export const INITIAL_DESKTOP_ICONS: DesktopIconData[] = [
     appId: 'about',
     position: { x: 10, y: 10 + ICON_GRID_SIZE * 4 },
   },
+  {
+    id: 'social-life',
+    label: 'social_life.exe',
+    icon: 'executable',
+    appId: 'errorTrigger',
+    position: { x: 10, y: 10 + ICON_GRID_SIZE * 5 },
+    meta: { errorKey: 'socialLife' },
+  },
+  {
+    id: 'sleep-schedule',
+    label: 'sleep_schedule.exe',
+    icon: 'executable',
+    appId: 'errorTrigger',
+    position: { x: 10, y: 10 + ICON_GRID_SIZE * 6 },
+    meta: { errorKey: 'sleep' },
+  },
+  {
+    id: 'minesweeper',
+    label: 'Minesweeper',
+    icon: 'minesweeper',
+    appId: 'errorTrigger',
+    position: { x: 10, y: 10 + ICON_GRID_SIZE * 7 },
+    meta: { errorKey: 'game' },
+  },
 ];

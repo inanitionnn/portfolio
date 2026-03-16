@@ -3,10 +3,12 @@ import Draggable, { type DraggableData, type DraggableEvent } from 'react-dragga
 import { type DesktopIconData } from '../../types';
 import { useDesktopStore } from '../../store/desktopStore';
 import { useWindowStore } from '../../store/windowStore';
+import { useErrorStore } from '../../store/errorStore';
 import { useContextMenu } from '../../hooks/useContextMenu';
 import { useIsMobile } from '../../hooks/useIsMobile';
 import { ContextMenu } from '../ContextMenu/ContextMenu';
-import { appIconMap, recycleBinIconMap } from '../../utils/iconMap';
+import { appIconMap, namedIconMap, recycleBinIconMap } from '../../utils/iconMap';
+import { funnyErrors } from '../../data/errorMessages';
 import { ICON_GRID_SIZE } from '../../utils/constants';
 import styles from './DesktopIcon.module.css';
 
@@ -26,6 +28,7 @@ export const DesktopIcon = ({ data, isSelected, onSelect }: DesktopIconProps) =>
   const moveToRecycleBin = useDesktopStore((s) => s.moveToRecycleBin);
   const recycleBinItems = useDesktopStore((s) => s.recycleBinItems);
   const openWindow = useWindowStore((s) => s.openWindow);
+  const showError = useErrorStore((s) => s.showError);
 
   const { visible, x, y, items, showMenu, hideMenu } = useContextMenu();
   const [propertiesOpen, setPropertiesOpen] = useState(false);
@@ -35,12 +38,21 @@ export const DesktopIcon = ({ data, isSelected, onSelect }: DesktopIconProps) =>
   const clickTimeRef = useRef<number>(0);
 
   const isRecycleBin = appId === 'recycleBin';
+  const isErrorTrigger = appId === 'errorTrigger';
 
   const RecycleBinIcon = recycleBinItems.length > 0
     ? recycleBinIconMap.full
     : recycleBinIconMap.empty;
 
-  const IconComponent = isRecycleBin ? RecycleBinIcon : appIconMap[appId];
+  const IconComponent = isRecycleBin
+    ? RecycleBinIcon
+    : (namedIconMap[data.icon] ?? appIconMap[appId]);
+
+  const triggerError = useCallback(() => {
+    const key = data.meta?.errorKey as string | undefined;
+    const entry = key ? funnyErrors[key] : undefined;
+    if (entry) showError(entry.title, entry.message, entry.icon, entry.buttons);
+  }, [data.meta, showError]);
 
   const handleDragStop = (_e: DraggableEvent, d: DraggableData) => {
     const snapped = {
@@ -58,7 +70,11 @@ export const DesktopIcon = ({ data, isSelected, onSelect }: DesktopIconProps) =>
     clickTimeRef.current = now;
 
     if (isDoubleClick) {
-      openWindow(appId, label, appId);
+      if (isErrorTrigger) {
+        triggerError();
+      } else {
+        openWindow(appId, label, appId);
+      }
     } else {
       onSelect(id);
     }
@@ -69,12 +85,15 @@ export const DesktopIcon = ({ data, isSelected, onSelect }: DesktopIconProps) =>
     e.stopPropagation();
     onSelect(id);
     showMenu(e, [
-      { label: 'Open', onClick: () => openWindow(appId, label, appId) },
+      {
+        label: 'Open',
+        onClick: () => isErrorTrigger ? triggerError() : openWindow(appId, label, appId),
+      },
       { label: 'Delete', onClick: () => moveToRecycleBin(id) },
       { type: 'separator', label: '' },
       { label: 'Properties', onClick: () => setPropertiesOpen(true) },
     ]);
-  }, [isRecycleBin, id, appId, label, onSelect, showMenu, openWindow, moveToRecycleBin]);
+  }, [isRecycleBin, isErrorTrigger, id, appId, label, onSelect, showMenu, openWindow, moveToRecycleBin, triggerError]);
 
   return (
     <>
@@ -93,7 +112,7 @@ export const DesktopIcon = ({ data, isSelected, onSelect }: DesktopIconProps) =>
           onContextMenu={handleContextMenu}
         >
           <div className={styles.iconImage}>
-            <IconComponent width={32} height={32} />
+            {IconComponent && <IconComponent width={32} height={32} />}
           </div>
           <span className={styles.iconLabel}>{label}</span>
         </div>

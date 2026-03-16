@@ -4,7 +4,8 @@ export type AppId =
   | 'recycleBin'
   | 'contact'
   | 'about'
-  | 'projectViewer';
+  | 'projectViewer'
+  | 'errorTrigger';
 
 export interface WindowState {
   id: string;
