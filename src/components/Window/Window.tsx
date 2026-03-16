@@ -3,6 +3,7 @@ import { Rnd, type RndResizeCallback, type DraggableData } from 'react-rnd';
 import type { DraggableEvent } from 'react-draggable';
 import { useShallow } from 'zustand/react/shallow';
 import { useWindowStore, getActiveWindowId } from '../../store/windowStore';
+import { WindowContext } from '../../contexts/WindowContext';
 import styles from './Window.module.css';
 
 interface WindowProps {
@@ -90,7 +91,9 @@ export const Window = ({ id, children }: WindowProps) => {
             <button aria-label="Close" onClick={() => closeWindow(id)} />
           </div>
         </div>
-        <div className={`window-body ${styles.windowBody}`}>{children}</div>
+        <div className={`window-body ${styles.windowBody}`}>
+          <WindowContext.Provider value={id}>{children}</WindowContext.Provider>
+        </div>
       </div>
     </Rnd>
   );

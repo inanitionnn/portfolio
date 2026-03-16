@@ -57,7 +57,7 @@ const ExplorerApp = () => {
   };
 
   const handleProjectOpen = (project: Project) => {
-    openWindow('projectViewer', project.name, 'projectViewer', { projectId: project.id });
+    openWindow('projectViewer', `${project.name}.doc — WordPad`, 'projectViewer', { projectId: project.id });
   };
 
   const canGoBack = historyIndex > 0;
