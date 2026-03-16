@@ -32,7 +32,7 @@ export const INITIAL_DESKTOP_ICONS: DesktopIconData[] = [
   },
   {
     id: 'icon-about',
-    label: 'About.txt',
+    label: 'about_me.txt — Notepad',
     icon: 'about',
     appId: 'about',
     position: { x: 10, y: 10 + ICON_GRID_SIZE * 4 },
