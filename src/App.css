@@ -4,7 +4,7 @@ body {
   margin: 0;
   overflow: hidden;
   height: 100vh;
-  cursor: url('/cursor/arrow.cur'), auto;
+  cursor: default;
   font-family: 'MS Sans Serif', Arial, sans-serif;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: unset;
@@ -15,7 +15,7 @@ button,
 [role='button'],
 label[for],
 select {
-  cursor: url('/cursor/pointer.cur'), pointer;
+  cursor: pointer;
 }
 
 input[type='text'],
@@ -25,12 +25,12 @@ input[type='url'],
 input[type='password'],
 textarea,
 [contenteditable] {
-  cursor: url('/cursor/text.cur'), text;
+  cursor: text;
 }
 
 .cursor-wait,
 .cursor-wait * {
-  cursor: url('/cursor/wait.cur'), wait;
+  cursor: wait;
 }
 
 .desktop-icon,

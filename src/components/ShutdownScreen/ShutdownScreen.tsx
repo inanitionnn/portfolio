@@ -9,9 +9,9 @@ interface ShutdownScreenProps {
   onRestart: () => void;
 }
 
-const SAFE_MESSAGE_DELAY_MS = 2000;
-const AUTO_RESTART_DELAY_MS = 3000;
-const RESTART_MODE_DELAY_MS = 1500;
+const SAFE_MESSAGE_DELAY_MS = 1000;
+const AUTO_RESTART_DELAY_MS = 1500;
+const RESTART_MODE_DELAY_MS = 1000;
 
 export const ShutdownScreen = ({ onRestart }: ShutdownScreenProps) => {
   const shutdownMode = useUiStore((s) => s.shutdownMode);

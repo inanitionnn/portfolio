@@ -10,7 +10,7 @@ interface BootScreenProps {
 }
 
 const PROGRESS_INTERVAL_MS = 50;
-const PROGRESS_STEP = 2;
+const PROGRESS_STEP = 5;
 
 export const BootScreen = ({ onBootComplete }: BootScreenProps) => {
   const [phase, setPhase] = useState<BootPhase>('black');
@@ -18,18 +18,20 @@ export const BootScreen = ({ onBootComplete }: BootScreenProps) => {
   const { playStartup } = useSounds();
 
   useEffect(() => {
-    const toLogoTimer = setTimeout(() => setPhase('logo'), 500);
+    const toLogoTimer = setTimeout(() => setPhase('logo'), 200);
     return () => clearTimeout(toLogoTimer);
   }, []);
 
   useEffect(() => {
     if (phase !== 'logo') return;
-    const toProgressTimer = setTimeout(() => setPhase('progress'), 800);
+    const toProgressTimer = setTimeout(() => setPhase('progress'), 300);
     return () => clearTimeout(toProgressTimer);
   }, [phase]);
 
   useEffect(() => {
     if (phase !== 'progress') return;
+
+    playStartup();
 
     const interval = setInterval(() => {
       setProgress((prev) => {
@@ -49,7 +51,6 @@ export const BootScreen = ({ onBootComplete }: BootScreenProps) => {
     if (progress < 100) return;
 
     const doneTimer = setTimeout(() => {
-      playStartup();
       setPhase('done');
     }, 300);
 
