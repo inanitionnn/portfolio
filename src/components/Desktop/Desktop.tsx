@@ -2,10 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useDesktopStore } from '../../store/desktopStore';
 import { useWindowStore } from '../../store/windowStore';
+import { useErrorStore } from '../../store/errorStore';
 import { useContextMenu } from '../../hooks/useContextMenu';
 import { Window } from '../Window/Window';
 import { DesktopIcon } from './DesktopIcon';
 import { ContextMenu } from '../ContextMenu/ContextMenu';
+import { ErrorDialog } from '../ErrorDialog/ErrorDialog';
 import { renderApp } from '../../utils/registry';
 import { TASKBAR_HEIGHT } from '../../utils/constants';
 import styles from './Desktop.module.css';
@@ -17,6 +19,8 @@ export const Desktop = () => {
   const icons = useDesktopStore((s) => s.icons);
   const windows = useWindowStore(useShallow((s) => s.windows.filter((w) => w.isOpen)));
   const openWindow = useWindowStore((s) => s.openWindow);
+  const errors = useErrorStore((s) => s.errors);
+  const dismissError = useErrorStore((s) => s.dismissError);
 
   const { visible, x, y, items, showMenu, hideMenu } = useContextMenu();
 
@@ -66,6 +70,17 @@ export const Desktop = () => {
       ))}
 
       <ContextMenu visible={visible} x={x} y={y} items={items} onClose={hideMenu} />
+
+      {errors.map((err) => (
+        <ErrorDialog
+          key={err.id}
+          {...err}
+          onClose={(button) => {
+            if (button === 'Hire Anyway') openWindow('contact', 'Contact', 'contact');
+            dismissError(err.id);
+          }}
+        />
+      ))}
 
       {propertiesOpen && (
         <div className={styles.propertiesOverlay} onClick={() => setPropertiesOpen(false)}>
