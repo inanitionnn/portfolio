@@ -1,9 +1,10 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, useEffect } from 'react';
 import { Rnd, type RndResizeCallback, type DraggableData } from 'react-rnd';
 import type { DraggableEvent } from 'react-draggable';
 import { useShallow } from 'zustand/react/shallow';
 import { useWindowStore, getActiveWindowId } from '../../store/windowStore';
 import { WindowContext } from '../../contexts/WindowContext';
+import { useSoundEffect } from '../../hooks/useSoundEffect';
 import styles from './Window.module.css';
 
 interface WindowProps {
@@ -29,6 +30,14 @@ export const Window = ({ id, children }: WindowProps) => {
     );
 
   const isActive = useWindowStore((s) => getActiveWindowId(s.windows) === id);
+
+  const playWindowOpen = useSoundEffect('/sounds/window-open.mp3');
+  const playWindowClose = useSoundEffect('/sounds/window-close.mp3');
+
+  useEffect(() => {
+    playWindowOpen();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { focusWindow, closeWindow, minimizeWindow, maximizeWindow, unmaximizeWindow, updatePosition, updateSize } =
     useWindowStore(
@@ -88,7 +97,7 @@ export const Window = ({ id, children }: WindowProps) => {
               aria-label={isMaximized ? 'Restore' : 'Maximize'}
               onClick={handleMaximizeToggle}
             />
-            <button aria-label="Close" onClick={() => closeWindow(id)} />
+            <button aria-label="Close" onClick={() => { playWindowClose(); closeWindow(id); }} />
           </div>
         </div>
         <div className={`window-body ${styles.windowBody}`}>

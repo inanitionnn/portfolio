@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useUiStore } from '../../store/uiStore';
-// TODO: import { useSounds } from '../../hooks/useSounds';
+import { useSounds } from '../../hooks/useSounds';
 import styles from './ShutdownScreen.module.css';
 
 type ShutdownPhase = 'shutting' | 'safe';
@@ -16,11 +16,11 @@ const RESTART_MODE_DELAY_MS = 1500;
 export const ShutdownScreen = ({ onRestart }: ShutdownScreenProps) => {
   const shutdownMode = useUiStore((s) => s.shutdownMode);
   const [phase, setPhase] = useState<ShutdownPhase>('shutting');
-  // TODO: const { play } = useSounds();
+  const { playShutdown } = useSounds();
 
   useEffect(() => {
-    // TODO: play('shutdown');
-  }, []);
+    playShutdown();
+  }, [playShutdown]);
 
   useEffect(() => {
     if (shutdownMode === 'restart') {

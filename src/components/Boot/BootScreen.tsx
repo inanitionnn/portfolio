@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ProgressBar } from 'react95';
-// TODO: import { useSounds } from '../../hooks/useSounds';
+import { useSounds } from '../../hooks/useSounds';
 import styles from './BootScreen.module.css';
 
 type BootPhase = 'black' | 'logo' | 'progress' | 'done';
@@ -15,7 +15,7 @@ const PROGRESS_STEP = 2;
 export const BootScreen = ({ onBootComplete }: BootScreenProps) => {
   const [phase, setPhase] = useState<BootPhase>('black');
   const [progress, setProgress] = useState(0);
-  // TODO: const { play } = useSounds();
+  const { playStartup } = useSounds();
 
   useEffect(() => {
     const toLogoTimer = setTimeout(() => setPhase('logo'), 500);
@@ -49,7 +49,7 @@ export const BootScreen = ({ onBootComplete }: BootScreenProps) => {
     if (progress < 100) return;
 
     const doneTimer = setTimeout(() => {
-      // TODO: play('startup');
+      playStartup();
       setPhase('done');
     }, 300);
 

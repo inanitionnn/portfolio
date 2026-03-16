@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Notepad, Ie } from '@react95/icons';
 import { useDesktopStore } from '../../store/desktopStore';
-import { useSettingsStore } from '../../store/settingsStore';
+import { useSoundEffect } from '../../hooks/useSoundEffect';
 import { type DesktopIconData } from '../../types';
 import styles from './RecycleBinApp.module.css';
 
@@ -10,40 +10,12 @@ const FILE_ICONS: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   browser: Ie,
 };
 
-const playEmptySound = (volume: number) => {
-  try {
-    const ctx = new AudioContext();
-
-    const playTone = (freq: number, startTime: number, duration: number, gainVal: number) => {
-      const osc = ctx.createOscillator();
-      const gainNode = ctx.createGain();
-      osc.connect(gainNode);
-      gainNode.connect(ctx.destination);
-      osc.type = 'square';
-      osc.frequency.setValueAtTime(freq, startTime);
-      gainNode.gain.setValueAtTime(gainVal * volume, startTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
-      osc.start(startTime);
-      osc.stop(startTime + duration);
-    };
-
-    const now = ctx.currentTime;
-    playTone(880, now, 0.08, 0.15);
-    playTone(660, now + 0.08, 0.08, 0.15);
-    playTone(440, now + 0.16, 0.1, 0.15);
-    playTone(220, now + 0.26, 0.15, 0.1);
-  } catch {
-    // AudioContext not available; skip sound
-  }
-};
-
 const RecycleBinApp = () => {
   const recycleBinItems = useDesktopStore((s) => s.recycleBinItems);
   const restoreFromRecycleBin = useDesktopStore((s) => s.restoreFromRecycleBin);
   const emptyRecycleBin = useDesktopStore((s) => s.emptyRecycleBin);
 
-  const soundEnabled = useSettingsStore((s) => s.soundEnabled);
-  const volume = useSettingsStore((s) => s.volume);
+  const playEmptyBin = useSoundEffect('/sounds/empty-recycle-bin.mp3');
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [jokeErrorItem, setJokeErrorItem] = useState<DesktopIconData | null>(null);
@@ -59,9 +31,7 @@ const RecycleBinApp = () => {
   const handleEmptyRecycleBin = () => {
     if (recycleBinItems.length === 0) return;
     emptyRecycleBin();
-    if (soundEnabled) {
-      playEmptySound(volume);
-    }
+    playEmptyBin();
   };
 
   const itemCount = recycleBinItems.length;
