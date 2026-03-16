@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useDesktopStore } from '../../store/desktopStore';
 import { useWindowStore } from '../../store/windowStore';
@@ -13,6 +13,14 @@ export const Desktop = () => {
 
   const icons = useDesktopStore((s) => s.icons);
   const windows = useWindowStore(useShallow((s) => s.windows.filter((w) => w.isOpen)));
+  const openWindow = useWindowStore((s) => s.openWindow);
+
+  const hasOpenedBrowser = useRef(false);
+  useEffect(() => {
+    if (hasOpenedBrowser.current) return;
+    hasOpenedBrowser.current = true;
+    openWindow('browser', 'Internet Explorer', 'browser');
+  }, [openWindow]);
 
   const handleDesktopClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {

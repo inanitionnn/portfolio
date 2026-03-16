@@ -1,0 +1,281 @@
+/* ── Browser chrome ─────────────────────────────────────── */
+
+.browser {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: #c0c0c0;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px;
+  border-bottom: 2px solid #808080;
+  background: #c0c0c0;
+  flex-shrink: 0;
+}
+
+.toolbarButtons {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.toolbarButtons button {
+  min-width: 32px;
+  padding: 1px 6px;
+  font-size: 12px;
+}
+
+.addressBar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.addressLabel {
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+  font-size: 11px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.addressInput {
+  flex: 1;
+  min-width: 0;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+  font-size: 11px;
+  padding: 1px 4px;
+  border: 2px inset #808080;
+  background: #fff;
+  height: 20px;
+  box-sizing: border-box;
+}
+
+/* ── Page area ───────────────────────────────────────────── */
+
+.page {
+  flex: 1;
+  overflow-y: auto;
+  background: #ffffff;
+  /* Subtle 90s dot pattern */
+  background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+  background-size: 16px 16px;
+  padding: 16px 20px 24px;
+  font-family: 'Comic Sans MS', 'Times New Roman', serif;
+  color: #000000;
+}
+
+/* ── Hero ────────────────────────────────────────────────── */
+
+.heroSection {
+  text-align: center;
+  padding: 12px 0 8px;
+}
+
+.heroTitle {
+  font-size: 28px;
+  font-family: 'Times New Roman', serif;
+  color: #000080;
+  margin: 0 0 4px;
+  text-shadow: 1px 1px 0 #8888cc;
+}
+
+.heroSubtitle {
+  font-size: 18px;
+  font-family: 'Comic Sans MS', cursive;
+  color: #800000;
+  margin: 0 0 6px;
+}
+
+.heroMeta {
+  font-size: 13px;
+  color: #333333;
+  margin: 0;
+}
+
+/* ── Marquee ─────────────────────────────────────────────── */
+
+.marqueeWrap {
+  overflow: hidden;
+  white-space: nowrap;
+  background: #000080;
+  color: #ffff00;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+  font-size: 12px;
+  padding: 3px 0;
+  margin: 10px 0;
+}
+
+.marqueeText {
+  display: inline-block;
+  animation: marqueeScroll 18s linear infinite;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* ── Counter / Under Construction ───────────────────────── */
+
+.counterBadge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f0f0f0;
+  border: 2px inset #808080;
+  padding: 4px 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #000;
+}
+
+.counter {
+  background: #000;
+  color: #00ff00;
+  padding: 2px 8px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* ── Divider ─────────────────────────────────────────────── */
+
+.divider {
+  border: none;
+  border-top: 2px inset #808080;
+  margin: 12px 0;
+}
+
+/* ── Sections ────────────────────────────────────────────── */
+
+.section {
+  margin-bottom: 8px;
+}
+
+.sectionTitle {
+  font-family: 'Times New Roman', serif;
+  font-size: 16px;
+  color: #000080;
+  margin: 0 0 8px;
+  border-bottom: 1px solid #000080;
+  padding-bottom: 2px;
+}
+
+/* ── Skills ──────────────────────────────────────────────── */
+
+.skillsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.skillsTable td {
+  padding: 3px 4px;
+}
+
+.skillBadge {
+  display: inline-block;
+  background: #000080;
+  color: #ffffff;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+  font-size: 11px;
+  padding: 2px 6px;
+  border: 1px outset #8888cc;
+  white-space: nowrap;
+}
+
+/* ── Experience ──────────────────────────────────────────── */
+
+.expTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.expTable tr {
+  border-bottom: 1px dotted #aaaaaa;
+}
+
+.expTable td {
+  padding: 5px 8px 5px 0;
+  vertical-align: top;
+}
+
+.expCompany {
+  font-weight: bold;
+  color: #0000ee;
+  text-decoration: underline;
+  width: 40%;
+}
+
+.expRole {
+  width: 35%;
+  color: #333;
+}
+
+.expPeriod {
+  width: 25%;
+  color: #666;
+  font-style: italic;
+  text-align: right;
+}
+
+/* ── Quick Links ─────────────────────────────────────────── */
+
+.quickLinks {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.quickLinks button {
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+  font-size: 12px;
+}
+
+.cvLink {
+  display: inline-block;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+  font-size: 12px;
+  color: #0000ff;
+  text-decoration: underline;
+  padding: 3px 8px;
+  border: 2px outset #c0c0c0;
+  background: #c0c0c0;
+  cursor: pointer;
+}
+
+.cvLink:hover {
+  background: #d4d4d4;
+}
+
+.cvLink:active {
+  border-style: inset;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+
+.footer {
+  text-align: center;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+  font-size: 11px;
+  color: #666666;
+  margin-top: 16px;
+  padding-top: 8px;
+  border-top: 1px solid #aaaaaa;
+}
+
+.footer p {
+  margin: 2px 0;
+}
