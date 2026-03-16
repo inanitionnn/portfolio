@@ -15,7 +15,30 @@ interface DesktopStore {
 export const useDesktopStore = create<DesktopStore>()(
   immer((set) => ({
     icons: INITIAL_DESKTOP_ICONS,
-    recycleBinItems: [],
+    recycleBinItems: [
+      {
+        id: 'joke-social',
+        label: 'my_social_life.txt',
+        icon: 'about',
+        appId: 'about',
+        position: { x: 0, y: 0 },
+        meta: {
+          isJoke: true,
+          errorMsg: 'File not found: my_social_life.txt\n\nThe system cannot locate this file.\nIt may never have existed.',
+        },
+      },
+      {
+        id: 'joke-sleep',
+        label: 'sleep_schedule.exe',
+        icon: 'browser',
+        appId: 'browser',
+        position: { x: 0, y: 0 },
+        meta: {
+          isJoke: true,
+          errorMsg: 'Runtime Error: sleep.dll is missing from your system.\n\nPlease reinstall sleep and try again.\nError code: 0xDEADB3D',
+        },
+      },
+    ],
 
     moveIcon: (id, position) =>
       set((state) => {
