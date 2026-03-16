@@ -1,0 +1,204 @@
+/* ── Explorer shell ──────────────────────────────────────── */
+
+.explorer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: #c0c0c0;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+  font-size: 11px;
+}
+
+/* ── Toolbar ─────────────────────────────────────────────── */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px;
+  border-bottom: 2px solid #808080;
+  background: #c0c0c0;
+  flex-shrink: 0;
+}
+
+.toolbarButtons {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.toolbarButtons button {
+  min-width: 52px;
+  padding: 1px 6px;
+  font-size: 11px;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+}
+
+.addressBar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.addressLabel {
+  font-size: 11px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.addressInput {
+  flex: 1;
+  min-width: 0;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+  font-size: 11px;
+  padding: 1px 4px;
+  border: 2px inset #808080;
+  background: #ffffff;
+  height: 20px;
+  box-sizing: border-box;
+}
+
+/* ── Content area ────────────────────────────────────────── */
+
+.content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Tree panel ──────────────────────────────────────────── */
+
+.treePanel {
+  width: 160px;
+  min-width: 120px;
+  overflow-y: auto;
+  border-right: 2px inset #808080;
+  background: #ffffff;
+  padding: 4px 0;
+  flex-shrink: 0;
+}
+
+.treeItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  color: #000000;
+}
+
+.treeItem:hover {
+  background: #000080;
+  color: #ffffff;
+}
+
+.treeItemActive {
+  background: #000080;
+  color: #ffffff;
+}
+
+.treeItemChild {
+  padding-left: 28px;
+}
+
+.treeIcon {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0;
+  image-rendering: pixelated;
+}
+
+/* ── Vertical splitter ───────────────────────────────────── */
+
+.splitter {
+  width: 3px;
+  background: #c0c0c0;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #ffffff;
+  flex-shrink: 0;
+}
+
+/* ── Main panel ──────────────────────────────────────────── */
+
+.mainPanel {
+  flex: 1;
+  overflow-y: auto;
+  background: #ffffff;
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 4px;
+}
+
+/* ── File / folder icons ─────────────────────────────────── */
+
+.fileIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 76px;
+  padding: 4px;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+.fileIcon:hover {
+  background: rgba(0, 0, 128, 0.12);
+  border-color: #000080;
+  outline: 1px dotted #000080;
+}
+
+.fileIconSelected {
+  background: #000080;
+  color: #ffffff;
+  border-color: #000080;
+  outline: 1px dotted #ffffff;
+}
+
+.fileIconSelected .iconLabel {
+  background: #000080;
+  color: #ffffff;
+}
+
+.iconImg {
+  width: 32px !important;
+  height: 32px !important;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+.iconLabel {
+  font-size: 11px;
+  text-align: center;
+  margin-top: 3px;
+  word-break: break-word;
+  max-width: 72px;
+  line-height: 1.2;
+}
+
+/* ── Status bar ──────────────────────────────────────────── */
+
+.statusBar {
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-top: 2px solid #808080;
+  background: #c0c0c0;
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.statusSection {
+  display: flex;
+  align-items: center;
+  border: 1px inset #808080;
+  padding: 1px 6px;
+  font-size: 11px;
+}
