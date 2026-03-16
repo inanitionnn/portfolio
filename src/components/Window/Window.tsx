@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
-import { Rnd, type RndResizeCallback, type DraggableData, type DraggableEvent } from 'react-rnd';
+import { Rnd, type RndResizeCallback, type DraggableData } from 'react-rnd';
+import type { DraggableEvent } from 'react-draggable';
 import { useShallow } from 'zustand/react/shallow';
 import { useWindowStore, getActiveWindowId } from '../../store/windowStore';
 import styles from './Window.module.css';
