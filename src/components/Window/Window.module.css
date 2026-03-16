@@ -1,0 +1,31 @@
+.rnd {
+  position: absolute !important;
+  box-sizing: border-box;
+}
+
+.window {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Inactive title bar — Win98 canonical gray gradient */
+.titleBarInactive {
+  background: linear-gradient(to right, #808080, #b5b5b5) !important;
+}
+
+.titleIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  vertical-align: middle;
+  image-rendering: pixelated;
+}
+
+.windowBody {
+  flex: 1;
+  overflow: auto;
+}
