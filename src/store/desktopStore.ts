@@ -9,6 +9,7 @@ interface DesktopStore {
   moveIcon: (id: string, position: { x: number; y: number }) => void;
   moveToRecycleBin: (iconId: string) => void;
   restoreFromRecycleBin: (iconId: string) => void;
+  deleteFromRecycleBin: (iconId: string) => void;
   emptyRecycleBin: () => void;
 }
 
@@ -60,6 +61,11 @@ export const useDesktopStore = create<DesktopStore>()(
         if (index === -1) return;
         const [icon] = state.recycleBinItems.splice(index, 1);
         state.icons.push(icon);
+      }),
+
+    deleteFromRecycleBin: (iconId) =>
+      set((state) => {
+        state.recycleBinItems = state.recycleBinItems.filter((i) => i.id !== iconId);
       }),
 
     emptyRecycleBin: () =>

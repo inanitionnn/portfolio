@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react';
 import { Notepad, Ie } from '@react95/icons';
 import { useDesktopStore } from '../../store/desktopStore';
 import { useSoundEffect } from '../../hooks/useSoundEffect';
+import { useContextMenu } from '../../hooks/useContextMenu';
+import { ContextMenu } from '../../components/ContextMenu/ContextMenu';
 import { type DesktopIconData } from '../../types';
 import styles from './RecycleBinApp.module.css';
 
@@ -13,12 +15,15 @@ const FILE_ICONS: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
 const RecycleBinApp = () => {
   const recycleBinItems = useDesktopStore((s) => s.recycleBinItems);
   const restoreFromRecycleBin = useDesktopStore((s) => s.restoreFromRecycleBin);
+  const deleteFromRecycleBin = useDesktopStore((s) => s.deleteFromRecycleBin);
   const emptyRecycleBin = useDesktopStore((s) => s.emptyRecycleBin);
 
   const playEmptyBin = useSoundEffect('/sounds/empty-recycle-bin.mp3');
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [jokeErrorItem, setJokeErrorItem] = useState<DesktopIconData | null>(null);
+
+  const { visible, x, y, items, showMenu, hideMenu } = useContextMenu();
 
   const handleItemDoubleClick = useCallback((item: DesktopIconData) => {
     if (item.meta?.isJoke) {
@@ -27,6 +32,15 @@ const RecycleBinApp = () => {
       restoreFromRecycleBin(item.id);
     }
   }, [restoreFromRecycleBin]);
+
+  const handleItemContextMenu = useCallback((e: React.MouseEvent, item: DesktopIconData) => {
+    e.stopPropagation();
+    setSelectedId(item.id);
+    showMenu(e, [
+      { label: 'Restore', onClick: () => restoreFromRecycleBin(item.id) },
+      { label: 'Delete permanently', onClick: () => deleteFromRecycleBin(item.id) },
+    ]);
+  }, [showMenu, restoreFromRecycleBin, deleteFromRecycleBin]);
 
   const handleEmptyRecycleBin = () => {
     if (recycleBinItems.length === 0) return;
@@ -78,6 +92,7 @@ const RecycleBinApp = () => {
                 className={`${styles.fileIcon} ${selectedId === item.id ? styles.fileIconSelected : ''}`}
                 onClick={() => setSelectedId(item.id)}
                 onDoubleClick={() => handleItemDoubleClick(item)}
+                onContextMenu={(e) => handleItemContextMenu(e, item)}
               >
                 <IconComponent className={styles.iconImg} />
                 <span className={styles.iconLabel}>{item.label}</span>
@@ -121,6 +136,8 @@ const RecycleBinApp = () => {
           </div>
         </div>
       )}
+
+      <ContextMenu visible={visible} x={x} y={y} items={items} onClose={hideMenu} />
     </div>
   );
 };
