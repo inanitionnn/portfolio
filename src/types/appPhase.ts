@@ -1,1 +1,1 @@
-export type AppPhase = 'booting' | 'desktop' | 'shuttingDown';
+export type AppPhase = 'booting' | 'desktop' | 'shuttingDown' | 'bsod';

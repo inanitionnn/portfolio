@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useUiStore } from '../../store/uiStore';
+import { useErrorStore } from '../../store/errorStore';
 import { type ShutdownMode } from '../../types/shutdown';
 import styles from './ShutdownDialog.module.css';
 
@@ -16,11 +17,25 @@ export const ShutdownDialog = ({ onClose }: ShutdownDialogProps) => {
       setAppPhase: s.setAppPhase,
     })),
   );
+  const showError = useErrorStore((s) => s.showError);
 
   const handleOk = () => {
     onClose();
-    setShutdownMode(selected);
-    setAppPhase('shuttingDown');
+
+    if (selected === 'restart') {
+      setShutdownMode('restart');
+      setAppPhase('shuttingDown');
+      return;
+    }
+
+    if (selected === 'shutdown') {
+      setAppPhase('bsod');
+      return;
+    }
+
+    if (selected === 'standby') {
+      showError('Stand By', 'Stand by is not supported on this computer.');
+    }
   };
 
   return (
@@ -58,6 +73,16 @@ export const ShutdownDialog = ({ onClose }: ShutdownDialogProps) => {
                 onChange={() => setSelected('restart')}
               />
               Restart the computer
+            </label>
+            <label className={styles.option}>
+              <input
+                type="radio"
+                name="shutdownMode"
+                value="standby"
+                checked={selected === 'standby'}
+                onChange={() => setSelected('standby')}
+              />
+              Stand by
             </label>
           </div>
 

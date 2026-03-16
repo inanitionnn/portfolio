@@ -7,6 +7,7 @@ import { Desktop } from './components/Desktop/Desktop';
 import { Taskbar } from './components/Taskbar/Taskbar';
 import { BootScreen } from './components/Boot/BootScreen';
 import { ShutdownScreen } from './components/ShutdownScreen/ShutdownScreen';
+import { BSOD } from './components/BSOD/BSOD';
 import { MobileHint } from './components/MobileHint/MobileHint';
 import './App.css';
 
@@ -24,6 +25,11 @@ function App() {
   }, [setAppPhase]);
 
   const handleRestart = useCallback(() => {
+    setShutdownMode('off');
+    setAppPhase('booting');
+  }, [setAppPhase, setShutdownMode]);
+
+  const handleBsodDismiss = useCallback(() => {
     setShutdownMode('off');
     setAppPhase('booting');
   }, [setAppPhase, setShutdownMode]);
@@ -47,6 +53,10 @@ function App() {
 
         {appPhase === 'shuttingDown' && (
           <ShutdownScreen onRestart={handleRestart} />
+        )}
+
+        {appPhase === 'bsod' && (
+          <BSOD onDismiss={handleBsodDismiss} />
         )}
       </ThemeProvider>
     </StyleSheetManager>

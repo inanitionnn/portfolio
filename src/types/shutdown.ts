@@ -1,1 +1,1 @@
-export type ShutdownMode = 'off' | 'shutdown' | 'restart';
+export type ShutdownMode = 'off' | 'shutdown' | 'restart' | 'standby';
