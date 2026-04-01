@@ -1,67 +1,58 @@
-import { type Project } from '../types';
+export interface Project {
+  title: string;
+  company: string;
+  description: string;
+  stack: string[];
+  link?: string;
+}
 
 export const projects: Project[] = [
-  // 2024 (CGS Team)
   {
-    id: 'design-with-bubbles',
-    name: 'Design with Bubbles',
-    year: 2024,
-    url: 'https://www.designwithbubbles.com/',
-    icon: 'doc',
-    description: '3D interior design platform',
-    stack: ['NestJS', 'TypeScript', 'PostgreSQL', 'Redis', 'Elasticsearch', 'Stripe', 'AWS Cognito'],
-    bullets: [
-      'Developed CAPI (backend API) for a 3D design platform',
-      'Implemented Stripe subscriptions with webhook-driven billing',
-      'Integrated Elasticsearch with relevance tuning and filtering',
-      'Built hierarchical project system with nested folders, node-based copying and cascading role inheritance',
-      'Implemented authorization via AWS Cognito',
-      'Optimized caching via Redis',
+    title: 'Banking Cashback Platform',
+    company: '42flows.tech',
+    description:
+      'Microservices-based cashback platform for Ukrainian banks. Handles transaction processing, currency conversion, and multi-tenant authorization for banking clients including Oschadbank and Radabank.',
+    stack: [
+      'NestJS',
+      'Kafka',
+      'RabbitMQ',
+      'PostgreSQL',
+      'Oracle',
+      'Redis',
+      'Keycloak',
+      'Docker',
     ],
+    link: 'https://42flows.tech/cashback-platform/',
   },
   {
-    id: 'autoplovykla',
-    name: 'Autoplovykla',
-    year: 2024,
-    url: 'https://autoplovykla.lt/',
-    icon: 'doc',
-    description: 'Lithuanian car wash network application',
-    stack: ['NestJS', 'TypeScript', 'PostgreSQL'],
-    bullets: [
-      'Booking system for a car wash network',
-      'Management panel for owners',
-      'Payment system integration',
+    title: 'Design with Bubbles',
+    company: 'CGS Team / Boom Interactive',
+    description:
+      'First communication platform in 3D — converts 2D plans into 3D scenes with collaboration features. Built the entire backend API including subscription billing, auth, search, and hierarchical project management.',
+    stack: [
+      'NestJS',
+      'PostgreSQL',
+      'Redis',
+      'Elasticsearch',
+      'Stripe',
+      'AWS Cognito',
     ],
+    link: 'https://www.designwithbubbles.com/',
   },
   {
-    id: 'taskey',
-    name: 'Taskey',
-    year: 2024,
-    url: 'https://www.taskey.io/',
-    icon: 'doc',
-    description: 'Mobile app for coaches, therapists and rehab specialists',
-    stack: ['NestJS', 'TypeScript', 'PostgreSQL', 'Firebase', 'Twilio'],
-    bullets: [
-      'Task and course system between practitioners and clients',
-      'Push notifications via Firebase',
-      'SMS notifications via Twilio',
-    ],
+    title: 'Autoplovykla',
+    company: 'CGS Team',
+    description:
+      'Lithuanian car wash network booking application with management interface for business owners.',
+    stack: ['NestJS', 'TypeORM', 'PostgreSQL'],
+    link: 'https://autoplovykla.lt/',
   },
-  // 2025 (42flows.tech)
   {
-    id: 'cashback-platform',
-    name: 'Cashback Platform',
-    year: 2025,
-    url: 'https://42flows.tech/cashback-platform/',
-    icon: 'doc',
-    description: 'Banking cashback platform',
-    stack: ['NestJS', 'TypeScript', 'Kafka', 'RabbitMQ', 'Bull', 'PostgreSQL', 'Oracle', 'MsSQL', 'Keycloak', 'LDAP', 'Docker', 'AWS'],
-    bullets: [
-      'Led migration from monolithic to microservice architecture of the Cashback module',
-      'Integrated Kafka, RabbitMQ, Bull for inter-service communication',
-      'Implemented authentication via Keycloak + LDAP for multi-tenant banking clients',
-      'Optimized SQL transactions across PostgreSQL, Oracle and MsSQL',
-      'Configured CI/CD pipelines and deployment via Dokploy on AWS',
-    ],
+    title: 'Taskey',
+    company: 'CGS Team',
+    description:
+      'Mobile app for coaches, therapists, and rehabilitation specialists. Task and course management system between practitioners and clients.',
+    stack: ['NestJS', 'PostgreSQL', 'Twilio', 'Firebase'],
+    link: 'https://www.taskey.io/',
   },
 ];
