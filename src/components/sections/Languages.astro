@@ -1,0 +1,84 @@
+---
+import { languagesConfig } from '@/config/site';
+---
+
+<section id="languages">
+  <div class="container">
+    <p class="section-label">06 — Languages</p>
+    <h2 class="section-title">Languages</h2>
+
+    <div class="lang-card fade-in">
+      <div class="lang-list">
+        {languagesConfig.map((lang) => (
+          <div class="lang-entry">
+            <div class="lang-left">
+              <span class="lang-name">{lang.language}</span>
+              {lang.note && (
+                <span class="lang-note">{lang.note}</span>
+              )}
+            </div>
+            <span class="lang-level">{lang.level}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .lang-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    max-width: 560px;
+  }
+
+  .lang-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .lang-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .lang-entry:first-child {
+    padding-top: 0;
+  }
+
+  .lang-entry:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .lang-left {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .lang-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .lang-note {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+  }
+
+  .lang-level {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+</style>

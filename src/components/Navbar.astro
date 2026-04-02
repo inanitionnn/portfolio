@@ -9,8 +9,11 @@ import { siteConfig } from '@/config/site';
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
+        <li><a href="#languages">Languages</a></li>
+        <li><a href="#testimonials">References</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -61,9 +64,36 @@ import { siteConfig } from '@/config/site';
     color: var(--text-primary);
   }
 
+  .nav-links a.active {
+    color: var(--accent);
+  }
+
   @media (max-width: 640px) {
     .nav-links {
       display: none;
     }
   }
 </style>
+
+<script>
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-links a[href^="#"]');
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => link.classList.remove('active'));
+          const active = document.querySelector<HTMLAnchorElement>(
+            `.nav-links a[href="#${entry.target.id}"]`
+          );
+          active?.classList.add('active');
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  document.querySelectorAll<HTMLElement>('section[id]').forEach((section) => {
+    sectionObserver.observe(section);
+  });
+</script>

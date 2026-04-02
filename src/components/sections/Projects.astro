@@ -1,0 +1,150 @@
+---
+import { projectsConfig } from '@/config/site';
+---
+
+<section id="projects">
+  <div class="container">
+    <p class="section-label">04 — Projects</p>
+    <h2 class="section-title">Projects</h2>
+
+    <div class="projects-grid">
+      {projectsConfig.map((project) => (
+        <a
+          class="project-card fade-in"
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={"Visit " + project.name}
+        >
+          <div class="card-image">
+            <img src={project.image} alt={project.name} loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <h3>{project.name}</h3>
+              <span class="card-link">↗</span>
+            </div>
+            <div class="card-meta">
+              <span class="card-company">{project.company}</span>
+              <span class="card-meta-sep">·</span>
+              <span class="card-duration">{project.duration}</span>
+            </div>
+            <p class="card-desc">{project.description}</p>
+            <p class="card-role">{project.role}</p>
+            <div class="card-tags">
+              {project.tags.map((t) => <span class="tag">{t}</span>)}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .project-card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .card-image {
+    width: 100%;
+    aspect-ratio: 8 / 3;
+    background: var(--border);
+    overflow: hidden;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .card-link {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    transition: color 0.15s;
+  }
+
+  .project-card:hover .card-link {
+    color: var(--accent);
+  }
+
+  .card-desc {
+    font-size: 0.875rem;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  .card-role {
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .card-company {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+  }
+
+  .card-meta-sep {
+    color: var(--border);
+    font-size: 0.72rem;
+  }
+
+  .card-duration {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+  }
+</style>

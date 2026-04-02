@@ -1,6 +1,6 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-import { siteConfig } from '@/config/site';
+import { ClientRouter } from 'astro:transitions';
+import { siteConfig, contactConfig } from '@/config/site';
 import Navbar from '@/components/Navbar.astro';
 import '@/styles/global.css';
 
@@ -11,6 +11,7 @@ interface Props {
 
 const { title, description } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, siteConfig.siteUrl).toString();
+const ogImageUrl = new URL('/og-image.png', siteConfig.siteUrl).toString();
 ---
 
 <html lang="en">
@@ -19,14 +20,47 @@ const canonicalUrl = new URL(Astro.url.pathname, siteConfig.siteUrl).toString();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-    <ViewTransitions />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/og-image.png', siteConfig.siteUrl).toString()} />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": siteConfig.name,
+      "jobTitle": siteConfig.title,
+      "url": siteConfig.siteUrl,
+      "email": contactConfig.email,
+      "sameAs": [
+        contactConfig.github,
+        contactConfig.linkedin,
+        contactConfig.telegram,
+      ],
+      "knowsAbout": [
+        "Node.js", "NestJS", "TypeScript", "Microservices",
+        "Apache Kafka", "RabbitMQ", "PostgreSQL", "FinTech"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Kyiv",
+        "addressCountry": "UA"
+      }
+    })} />
+
+    <ClientRouter />
   </head>
   <body>
     <Navbar />
@@ -34,8 +68,9 @@ const canonicalUrl = new URL(Astro.url.pathname, siteConfig.siteUrl).toString();
       <slot />
     </main>
     <footer>
-      <p>© 2025 Oleksandr Tarasiuk</p>
+      <p>© {new Date().getFullYear()} Oleksandr Tarasiuk</p>
     </footer>
+    <script src="../scripts/scroll-observer.ts"></script>
   </body>
 </html>
 

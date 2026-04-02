@@ -1,0 +1,117 @@
+---
+import { educationConfig } from '@/config/site';
+---
+
+<section id="education">
+  <div class="container">
+    <p class="section-label">03 — Education</p>
+    <h2 class="section-title">Education</h2>
+
+    {educationConfig.map((entry) => (
+      <div class="edu-card fade-in">
+        <div class="edu-header">
+          <div>
+            <h3>
+              <a href={entry.institutionUrl} target="_blank" rel="noopener noreferrer">
+                {entry.institution}
+              </a>
+            </h3>
+            <span class="edu-field">{entry.degree} · {entry.field}</span>
+          </div>
+          <span class="edu-period">{entry.period}</span>
+        </div>
+
+        <div class="edu-ects">
+          <span class="tag">{entry.ects} ECTS completed</span>
+          <span class="tag edu-status">Did not graduate</span>
+        </div>
+
+        <p class="edu-note">{entry.note}</p>
+
+        <div class="edu-courses">
+          <span class="courses-label">Relevant coursework</span>
+          <div class="courses-list">
+            {entry.courses.map((c) => <span class="tag">{c}</span>)}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+  }
+
+  .edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .edu-header h3 a {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color 0.15s;
+  }
+
+  .edu-header h3 a:hover {
+    color: var(--accent);
+  }
+
+  .edu-field {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    display: block;
+    margin-top: 4px;
+  }
+
+  .edu-period {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  .edu-ects {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .edu-status {
+    background: rgba(136, 136, 136, 0.1);
+    color: var(--text-secondary);
+  }
+
+  .edu-note {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .courses-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .courses-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+</style>

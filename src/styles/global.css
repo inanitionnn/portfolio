@@ -159,6 +159,17 @@ section {
   opacity: 1;
 }
 
+/* === MOBILE OVERRIDES === */
+@media (max-width: 640px) {
+  :root {
+    --section-gap: 80px;
+  }
+
+  .section-title {
+    margin-bottom: 32px;
+  }
+}
+
 /* === FADE-IN (JS adds .visible) === */
 .fade-in {
   opacity: 0;
@@ -169,4 +180,12 @@ section {
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }

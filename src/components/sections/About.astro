@@ -1,0 +1,137 @@
+---
+import { siteConfig, hobbiesConfig } from '@/config/site';
+---
+
+<section id="about">
+  <div class="container">
+    <p class="section-label">01 — About</p>
+    <h2 class="section-title">About Me</h2>
+
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>
+          I'm a backend engineer based in {siteConfig.location.split('·')[0].trim()},
+          with over 3 years of commercial experience building production-grade
+          distributed systems in Node.js and NestJS.
+        </p>
+        <p>
+          My focus is on FinTech and banking infrastructure — domains where
+          reliability, consistency, and performance aren't optional. I've worked
+          directly with production databases across PostgreSQL, Oracle, and MsSQL,
+          integrated Kafka and RabbitMQ for event-driven workflows, and led a
+          monolith-to-microservices migration for a live banking cashback platform.
+        </p>
+        <p>
+          I'm currently looking for backend engineering roles in Germany — ideally
+          in FinTech, payments, or distributed infrastructure.
+        </p>
+
+        <div class="hobbies-line">
+          <span class="hobbies-label">Outside of work</span>
+          <span class="hobbies-value">{hobbiesConfig.join(' · ')}</span>
+        </div>
+      </div>
+
+      <div class="about-code fade-in">
+        <pre class="code-block"><span class="kw">interface</span> <span class="type">Engineer</span> <span class="brace">{'{'}</span>
+  <span class="prop">name</span><span class="punct">:</span> <span class="type">string</span><span class="punct">;</span>
+  <span class="prop">focus</span><span class="punct">:</span> <span class="str">'backend'</span> <span class="punct">|</span> <span class="str">'fintech'</span><span class="punct">;</span>
+  <span class="prop">stack</span><span class="punct">:</span> <span class="brace">{'['}</span>
+    <span class="str">'NestJS'</span><span class="punct">,</span>
+    <span class="str">'Kafka'</span><span class="punct">,</span>
+    <span class="str">'PostgreSQL'</span><span class="punct">,</span>
+  <span class="brace">{']'}</span><span class="punct">;</span>
+  <span class="prop">openTo</span><span class="punct">:</span> <span class="str">'Germany'</span><span class="punct">;</span>
+<span class="brace">{'}'}</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: 60fr 35fr;
+      gap: 64px;
+      align-items: start;
+    }
+  }
+
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+  }
+
+  .code-block {
+    background: var(--surface);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.8;
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    white-space: pre;
+    overflow-x: auto;
+    margin: 0;
+  }
+
+  .kw {
+    color: var(--accent);
+  }
+
+  .type {
+    color: #61afef;
+  }
+
+  .prop {
+    color: var(--text-primary);
+  }
+
+  .str {
+    color: #98c379;
+  }
+
+  .punct {
+    color: var(--text-secondary);
+  }
+
+  .brace {
+    color: var(--text-primary);
+  }
+
+  .hobbies-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-top: 4px;
+  }
+
+  .hobbies-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .hobbies-value {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+</style>

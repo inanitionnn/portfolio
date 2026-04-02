@@ -1,0 +1,93 @@
+---
+import { testimonialsConfig } from '@/config/site';
+---
+
+<section id="testimonials">
+  <div class="container">
+    <p class="section-label">07 — Testimonials</p>
+    <h2 class="section-title">What People Say</h2>
+
+    <div class="testimonials-grid">
+      {testimonialsConfig.map((t) => (
+        <blockquote class="testimonial-card fade-in">
+          <p class="testimonial-quote">"{t.quote}"</p>
+          <footer class="testimonial-footer">
+            <div class="testimonial-meta">
+              <a
+                href={t.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="testimonial-name"
+              >
+                {t.name}
+              </a>
+              <span class="testimonial-role">{t.role} · {t.company}</span>
+            </div>
+          </footer>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .testimonial-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin: 0;
+    transition: border-color 0.2s;
+  }
+
+  .testimonial-card:hover {
+    border-color: var(--accent);
+  }
+
+  .testimonial-quote {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .testimonial-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .testimonial-name {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    transition: color 0.15s;
+    display: block;
+  }
+
+  .testimonial-name:hover {
+    color: var(--accent);
+  }
+
+  .testimonial-role {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    display: block;
+    margin-top: 2px;
+  }
+</style>
