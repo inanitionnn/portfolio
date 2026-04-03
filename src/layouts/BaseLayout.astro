@@ -11,7 +11,7 @@ interface Props {
 
 const { title, description } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, siteConfig.siteUrl).toString();
-const ogImageUrl = new URL('/og-image.png', siteConfig.siteUrl).toString();
+const ogImageUrl = `${new URL('/og-image.png', siteConfig.siteUrl).toString()}?v=${siteConfig.ogImageVersion}`;
 ---
 
 <html lang="en">
@@ -35,7 +35,7 @@ const ogImageUrl = new URL('/og-image.png', siteConfig.siteUrl).toString();
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL('/og-image.png', siteConfig.siteUrl).toString()} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
