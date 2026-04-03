@@ -9,7 +9,7 @@
   <!-- Label -->
   <text
     x="80" y="240"
-    font-family="monospace"
+    font-family="JetBrains Mono"
     font-size="22"
     fill="#E8A838"
     letter-spacing="4">SOFTWARE ENGINEER</text>
@@ -17,7 +17,7 @@
   <!-- Name -->
   <text
     x="80" y="310"
-    font-family="Arial, Helvetica, sans-serif"
+    font-family="Inter"
     font-size="72"
     font-weight="600"
     fill="#E8E8E8">Oleksandr Tarasiuk</text>
@@ -25,14 +25,14 @@
   <!-- Subtitle -->
   <text
     x="80" y="360"
-    font-family="Arial, Helvetica, sans-serif"
+    font-family="Inter"
     font-size="28"
     fill="#888888">Node.js &#xB7; NestJS &#xB7; Distributed Systems</text>
 
   <!-- Domain -->
   <text
     x="80" y="420"
-    font-family="monospace"
+    font-family="JetBrains Mono"
     font-size="22"
     fill="#E8A838"
     opacity="0.8">tarasiuk.site</text>
