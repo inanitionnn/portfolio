@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#111111"/>
+
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="6" height="630" fill="#E8A838"/>
+
+  <!-- Label -->
+  <text
+    x="80" y="240"
+    font-family="monospace"
+    font-size="22"
+    fill="#E8A838"
+    letter-spacing="4">SOFTWARE ENGINEER</text>
+
+  <!-- Name -->
+  <text
+    x="80" y="310"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="72"
+    font-weight="600"
+    fill="#E8E8E8">Oleksandr Tarasiuk</text>
+
+  <!-- Subtitle -->
+  <text
+    x="80" y="360"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="28"
+    fill="#888888">Node.js &#xB7; NestJS &#xB7; Distributed Systems</text>
+
+  <!-- Domain -->
+  <text
+    x="80" y="420"
+    font-family="monospace"
+    font-size="22"
+    fill="#E8A838"
+    opacity="0.8">tarasiuk.site</text>
+
+  <!-- Right decorative block  card + network nodes, centered at (980, 315) -->
+  <g transform="translate(980, 315)">
+
+    <!-- Outer network ring connections -->
+    <line x1="-120" y1="-105" x2="75"   y2="-115" stroke="#E8A838" stroke-width="1"   stroke-opacity="0.25" stroke-dasharray="4,4"/>
+    <line x1="75"   y1="-115" x2="145"  y2="-22"  stroke="#E8A838" stroke-width="1"   stroke-opacity="0.25" stroke-dasharray="4,4"/>
+    <line x1="145"  y1="-22"  x2="112"  y2="112"  stroke="#E8A838" stroke-width="1"   stroke-opacity="0.25" stroke-dasharray="4,4"/>
+    <line x1="112"  y1="112"  x2="-82"  y2="122"  stroke="#E8A838" stroke-width="1"   stroke-opacity="0.25" stroke-dasharray="4,4"/>
+    <line x1="-82"  y1="122"  x2="-145" y2="28"   stroke="#E8A838" stroke-width="1"   stroke-opacity="0.25" stroke-dasharray="4,4"/>
+    <line x1="-145" y1="28"   x2="-120" y2="-105" stroke="#E8A838" stroke-width="1"   stroke-opacity="0.25" stroke-dasharray="4,4"/>
+
+    <!-- Cross-chord connections (subtle) -->
+    <line x1="-120" y1="-105" x2="145"  y2="-22"  stroke="#E8A838" stroke-width="0.5" stroke-opacity="0.12" stroke-dasharray="3,7"/>
+    <line x1="75"   y1="-115" x2="-82"  y2="122"  stroke="#E8A838" stroke-width="0.5" stroke-opacity="0.12" stroke-dasharray="3,7"/>
+    <line x1="145"  y1="-22"  x2="-145" y2="28"   stroke="#E8A838" stroke-width="0.5" stroke-opacity="0.12" stroke-dasharray="3,7"/>
+
+    <!-- Card drop shadow -->
+    <rect x="-93" y="-53" width="200" height="120" rx="12"
+          fill="#c8882a" opacity="0.20"
+          transform="rotate(-5) translate(5, 6)"/>
+
+    <!-- Payment card -->
+    <g transform="rotate(-5)">
+      <rect x="-100" y="-60" width="200" height="120" rx="12" fill="#E8A838"/>
+
+      <!-- Chip -->
+      <rect x="-65" y="-36" width="32" height="24" rx="4" fill="#c8882a"/>
+      <line x1="-65" y1="-28" x2="-33" y2="-28" stroke="#a87020" stroke-width="1" opacity="0.6"/>
+      <line x1="-49" y1="-36" x2="-49" y2="-12" stroke="#a87020" stroke-width="1" opacity="0.6"/>
+
+      <!-- Magnetic stripe area -->
+      <rect x="-100" y="-4" width="200" height="20" fill="#000000" opacity="0.12"/>
+
+      <!-- Card number dots -->
+      <circle cx="-22" cy="32" r="3.5" fill="#c8882a"/>
+      <circle cx="-9"  cy="32" r="3.5" fill="#c8882a"/>
+      <circle cx="4"   cy="32" r="3.5" fill="#c8882a"/>
+      <circle cx="17"  cy="32" r="3.5" fill="#c8882a"/>
+
+      <!-- NFC arcs -->
+      <path d="M 55 -22 Q 63 -32 71 -22" stroke="#b87828" stroke-width="2"   fill="none"/>
+      <path d="M 49 -17 Q 63 -37 77 -17" stroke="#b87828" stroke-width="2"   fill="none" opacity="0.6"/>
+      <path d="M 43 -12 Q 63 -42 83 -12" stroke="#b87828" stroke-width="1.5" fill="none" opacity="0.3"/>
+    </g>
+
+    <!-- Network nodes -->
+    <circle cx="-120" cy="-105" r="12" fill="#2a2a2a" stroke="#E8A838" stroke-width="1.5"/>
+    <circle cx="-120" cy="-105" r="4"  fill="#E8A838"/>
+
+    <circle cx="75"  cy="-115" r="8"  fill="#2a2a2a" stroke="#E8A838" stroke-width="1"/>
+    <circle cx="75"  cy="-115" r="3"  fill="#E8A838" opacity="0.6"/>
+
+    <circle cx="145" cy="-22"  r="14" fill="#2a2a2a" stroke="#E8A838" stroke-width="1.5"/>
+    <circle cx="145" cy="-22"  r="5"  fill="#E8A838"/>
+
+    <circle cx="112" cy="112"  r="10" fill="#2a2a2a" stroke="#E8A838" stroke-width="1"/>
+    <circle cx="112" cy="112"  r="3.5" fill="#E8A838" opacity="0.6"/>
+
+    <circle cx="-82" cy="122"  r="12" fill="#2a2a2a" stroke="#E8A838" stroke-width="1.5"/>
+    <circle cx="-82" cy="122"  r="4"  fill="#E8A838"/>
+
+    <circle cx="-145" cy="28"  r="8"  fill="#2a2a2a" stroke="#E8A838" stroke-width="1"/>
+    <circle cx="-145" cy="28"  r="3"  fill="#E8A838" opacity="0.6"/>
+  </g>
+
+  <!-- Bottom border -->
+  <line x1="80" y1="590" x2="1120" y2="590" stroke="#2a2a2a" stroke-width="1"/>
+</svg>
