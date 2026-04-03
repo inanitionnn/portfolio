@@ -6,7 +6,7 @@ export const siteConfig = {
   tagline: 'Software Engineer',
   location: 'Kyiv, Ukraine · Open to relocate to Germany',
   bio: 'Backend engineer specializing in distributed systems, event-driven architectures, and FinTech infrastructure. I build reliable, scalable backend systems that handle real financial transactions.',
-  siteUrl: 'https://PLACEHOLDER_SITE_URL',
+  siteUrl: 'https://tarasiuk.site/',
 };
 
 export const contactConfig = {
