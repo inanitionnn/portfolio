@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://PLACEHOLDER_SITE_URL',
+  site: 'https://your-domain.com',
   output: 'static',
   compressHTML: true,
   integrations: [sitemap()],
