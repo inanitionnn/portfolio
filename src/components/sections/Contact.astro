@@ -14,6 +14,10 @@ import { contactConfig, siteConfig } from '@/config/site';
         {contactConfig.email}
       </a>
 
+      <a href={"tel:" + contactConfig.phone} class="contact-phone">
+        {contactConfig.phone}
+      </a>
+
       <div class="social-links">
         <a href={contactConfig.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
           <svg
@@ -92,6 +96,19 @@ import { contactConfig, siteConfig } from '@/config/site';
   }
 
   .contact-email:hover {
+    opacity: 0.8;
+  }
+
+  .contact-phone {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: -12px 0 24px;
+    transition: opacity 0.15s;
+  }
+
+  .contact-phone:hover {
     opacity: 0.8;
   }
 

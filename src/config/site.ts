@@ -11,6 +11,7 @@ export const siteConfig = {
 
 export const contactConfig = {
   email: 'tarolv3@gmail.com',
+  phone: '+380681911583',
   github: 'https://github.com/inanitionnn',
   linkedin: 'https://www.linkedin.com/in/oleksandr-tarasiuk-full-stack/',
   telegram: 'https://t.me/inanitionnn',
