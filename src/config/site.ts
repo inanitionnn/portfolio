@@ -223,12 +223,12 @@ export type LanguageEntry = {
 export const languagesConfig: LanguageEntry[] = [
   {
     language: 'Ukrainian',
-    level: 'C2 Native',
+    level: 'C2',
     note: '',
   },
   {
     language: 'English',
-    level: 'B2 Upper-Intermediate',
+    level: 'B2',
     note: 'TOEFL iBT in progress',
   },
   {

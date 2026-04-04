@@ -3,7 +3,6 @@ import { languagesConfig } from '@/config/site';
 
 function cefrToSegments(level: string): number {
   const s = level.toLowerCase();
-  if (s.startsWith('native')) return 6;
   if (s.startsWith('c2'))     return 6;
   if (s.startsWith('c1'))     return 5;
   if (s.startsWith('b2'))     return 4;
