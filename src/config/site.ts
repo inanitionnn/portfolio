@@ -2,19 +2,18 @@ import type { ImageMetadata } from 'astro';
 
 export const siteConfig = {
   name: 'Oleksandr Tarasiuk',
-  title: 'Software Engineer',
-  tagline: 'Software Engineer',
-  location: 'Kyiv, Ukraine · Open to relocate to Germany',
-  bio: 'Backend engineer specializing in distributed systems, event-driven architectures, and FinTech infrastructure. I build reliable, scalable backend systems that handle real financial transactions.',
+  title: 'Backend Engineer',
+  tagline: 'Backend Engineer',
+  location: 'Kyiv, Ukraine · Available for relocation to Germany · EU Blue Card eligible (Summer 2026)',
+  bio: 'Backend engineer with 2.5+ years building production Node.js/NestJS systems in fintech and automotive domains. Experienced in microservice architecture, event-driven pipelines (Kafka, RabbitMQ), and multi-database environments under real load.',
   siteUrl: 'https://tarasiuk.site/',
   ogImageVersion: 3,
 };
 
 export const contactConfig = {
   email: 'tarolv3@gmail.com',
-  phone: '+380681911583',
   github: 'https://github.com/inanitionnn',
-  linkedin: 'https://www.linkedin.com/in/oleksandr-tarasiuk-full-stack/',
+  linkedin: 'https://www.linkedin.com/in/oleksandr-tarasiuk-backend/',
   telegram: 'https://t.me/inanitionnn',
   cvPath: '/CV_Nodejs_Tarasiuk.pdf',
 };
@@ -32,29 +31,28 @@ export const experienceConfig: ExperienceEntry[] = [
   {
     company: '42flows.tech',
     companyUrl: 'https://42flows.tech',
-    role: 'Backend Developer',
+    role: 'Full-stack Developer',
     period: 'Apr 2025 – Present',
     bullets: [
-      'Led migration from monolithic to microservices architecture for a banking Cashback module',
-      'Integrated Kafka, RabbitMQ, and Bull message brokers for reliable inter-service communication and transaction processing',
-      'Implemented authentication and authorization using Keycloak and LDAP for multi-tenant banking clients',
-      'Wrote complex SQL transactions and optimized queries across PostgreSQL, Oracle, and MsSQL in production',
-      'Managed deployments via Dokploy on AWS, configured CI/CD pipelines, monitored logs through Kibana',
+      'Led migration from monolithic to microservices architecture for a banking Cashback module, improving scalability and maintainability',
+      'Integrated Kafka, RabbitMQ, and Bull message brokers for reliable inter-service communication, processing 300+ transactions per second',
+      'Implemented authentication and authorization using Keycloak and LDAP, supporting multi-tenant banking clients',
+      'Wrote complex SQL transactions and optimized queries across PostgreSQL, Oracle, and MsSQL databases in production',
+      'Managed deployments via Dokploy on AWS, configured CI/CD pipelines, and monitored logs through Kibana',
     ],
     tags: ['NestJS', 'TypeScript', 'Kafka', 'RabbitMQ', 'PostgreSQL', 'Oracle', 'MsSQL', 'Redis', 'Keycloak', 'AWS', 'Docker'],
   },
   {
     company: 'CGS Team',
     companyUrl: 'https://cgsteam.io',
-    role: 'Backend Developer',
+    role: 'Full-stack Developer',
     period: 'Oct 2023 – Feb 2025',
     bullets: [
-      'Implemented Elasticsearch search with relevance tuning, improving result accuracy ~20%',
+      'Implemented advanced Elasticsearch search with relevance tuning and filtering, improving result accuracy by ~20%',
       'Built a full-featured Stripe subscription system with webhook-driven billing and notifications',
-      'Extended a hierarchical project management system with nested folders and cascading role inheritance',
-      'Implemented AWS Cognito authentication and access control',
-      'Integrated Twilio for SMS and Firebase for real-time push notifications',
-      'Optimized Redis caching, reducing database load ~40%',
+      'Extended a tree-based project management system with nested folders, node copying, and cascading RBAC for an interior design platform',
+      'Implemented user authentication and access control using AWS Cognito',
+      'Optimized Redis caching strategy, reducing database load by ~40% and improving response times',
     ],
     tags: ['NestJS', 'TypeScript', 'PostgreSQL', 'MongoDB', 'Redis', 'Elasticsearch', 'Stripe', 'AWS Cognito', 'Twilio', 'Firebase', 'Docker'],
   },
@@ -150,7 +148,7 @@ export const projectsConfig: Project[] = [
     role: 'Backend API — Stripe billing, AWS Cognito auth, Elasticsearch search, hierarchical project management with cascading permissions.',
     duration: '~1 year',
     company: 'CGS Team',
-    tags: ['NestJS', 'Stripe', 'Elasticsearch', 'AWS Cognito', 'Redis', 'PostgreSQL'],
+    tags: ['NestJS', 'Stripe', 'Elasticsearch', 'AWS Cognito', 'Redis', 'PostgreSQL', 'React'],
     link: 'https://www.designwithbubbles.com/',
     image: '/images/projects/bubbles.png',
   },
@@ -170,14 +168,14 @@ export const projectsConfig: Project[] = [
     role: 'Core API with NestJS and PostgreSQL, Elasticsearch search, Redis caching optimization.',
     duration: '~3 months',
     company: 'CGS Team',
-    tags: ['NestJS', 'PostgreSQL', 'Elasticsearch', 'Redis', 'Twilio', 'Firebase'],
+    tags: ['NestJS', 'PostgreSQL', 'Elasticsearch', 'Redis', 'Next.js'],
     link: 'https://www.taskey.io/',
     image: '/images/projects/taskey.png',
   },
 ];
 
 export type SkillTier = {
-  tier: 'Core' | 'Proficient' | 'Familiar' | 'Learning';
+  tier: 'Core' | 'Proficient' | 'Familiar';
   description: string;
   skills: string[];
 };
@@ -187,37 +185,32 @@ export const skillsConfig: SkillTier[] = [
     tier: 'Core',
     description: 'Use daily in production',
     skills: [
-      'TypeScript', 'Node.js', 'NestJS', 'ExpressJS',
+      'TypeScript', 'JavaScript', 'Node.js', 'NestJS', 'ExpressJS',
       'PostgreSQL', 'Redis',
       'Kafka', 'RabbitMQ',
-      'Docker', 'Swagger',
+      'Docker', 'Git', 'Swagger',
     ],
   },
   {
     tier: 'Proficient',
     description: 'Solid production experience',
     skills: [
+      'TypeORM', 'Prisma', 'DrizzleORM',
+      'REST', 'GraphQL', 'tRPC',
       'AWS', 'Oracle', 'MsSQL',
-      'Elasticsearch', 'Keycloak', 'LDAP',
-      'Dokploy', 'Kibana', 'CI/CD',
+      'Elasticsearch', 'Keycloak', 'LDAP', 'AWS Cognito',
+      'Dokploy', 'Kibana', 'CI/CD', 'Jira',
       'React', 'Next.js',
-      'Stripe', 'Twilio', 'Firebase',
+      'Stripe', 'Bull',
     ],
   },
   {
     tier: 'Familiar',
     description: 'Used on projects or in exploration',
     skills: [
-      'Python', 'Embedded C', 'C++',
-      'Go',
-      'GraphQL', 'tRPC', 'Bull',
+      'Java', 'Python', 'Go',
       'MongoDB',
     ],
-  },
-  {
-    tier: 'Learning',
-    description: 'Actively studying',
-    skills: ['Java', 'Spring'],
   },
 ];
 
@@ -230,7 +223,7 @@ export type LanguageEntry = {
 export const languagesConfig: LanguageEntry[] = [
   {
     language: 'Ukrainian',
-    level: 'Native',
+    level: 'C2 Native',
     note: '',
   },
   {

@@ -1,0 +1,294 @@
+---
+// Interactive terminal with typing animation — no dependencies, vanilla JS only
+---
+
+<div class="terminal" id="about-terminal">
+  <div class="terminal-bar">
+    <div class="terminal-dots">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-yellow"></span>
+      <span class="dot dot-green"></span>
+    </div>
+    <span class="terminal-title">oleksandr@dev:~</span>
+  </div>
+  <div class="terminal-body">
+    <div class="terminal-content" id="about-terminal-content"></div>
+  </div>
+</div>
+
+<script>
+  type CmdLine   = { type: 'cmd';   name: string; args?: string };
+  type OutLine   = { type: 'out';   html: string };
+  type BlankLine = { type: 'blank' };
+  type TerminalLine = CmdLine | OutLine | BlankLine;
+
+  // Output lines kept ≤ 34 chars (fits narrow column at 12px, no wrapping).
+  // Git format: feat/scope/TASK-ID — branch-name style with task reference.
+  // Keywords (feat, fix) and task IDs are amber via .accent class.
+  const LINES: TerminalLine[] = [
+    { type: 'cmd',   name: 'whoami' },
+    { type: 'out',   html: '<span class="hi">backend engineer</span>' },
+    { type: 'blank' },
+    { type: 'cmd',   name: 'cat',  args: ' expertise.md' },
+    { type: 'out',   html: '<span class="hi"># distributed systems, fintech</span>' },
+    { type: 'blank' },
+    { type: 'cmd',   name: 'git',  args: ' log --oneline -3' },
+    { type: 'out',   html: '<span class="hi">a1b2c3 feat/microservices/F-12</span>' },
+    { type: 'out',   html: '<span class="hi">d4e5f6 feat/stripe-billing/F-47</span>' },
+    { type: 'out',   html: '<span class="hi">h7i8j9 fix/elasticsearch/F-89</span>' },
+    { type: 'blank' },
+    { type: 'cmd',   name: 'cat',  args: ' .env | grep NEXT_ROLE' },
+    { type: 'out',   html: '<span class="hi">NEXT_ROLE=backend_germany_2026</span>' },
+  ];
+
+  const delay = (ms: number): Promise<void> => new Promise(r => setTimeout(r, ms));
+
+  function appendFinalPrompt(container: HTMLElement): void {
+    const el = document.createElement('div');
+    el.className = 'line';
+    el.innerHTML = '<span class="prompt">$ </span><span class="cursor" aria-hidden="true">█</span>';
+    container.appendChild(el);
+  }
+
+  async function runAnimated(container: HTMLElement): Promise<void> {
+    for (const line of LINES) {
+      if (line.type === 'blank') {
+        const el = document.createElement('div');
+        el.className = 'line blank';
+        container.appendChild(el);
+        await delay(100);
+        continue;
+      }
+
+      if (line.type === 'cmd') {
+        const el = document.createElement('div');
+        el.className = 'line';
+
+        const promptSpan = document.createElement('span');
+        promptSpan.className = 'prompt';
+        promptSpan.textContent = '$ ';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'cmd-name';
+
+        const argsSpan = document.createElement('span');
+        argsSpan.className = 'cmd-args';
+
+        const cursorSpan = document.createElement('span');
+        cursorSpan.className = 'cursor';
+        cursorSpan.setAttribute('aria-hidden', 'true');
+        cursorSpan.textContent = '█';
+
+        el.appendChild(promptSpan);
+        el.appendChild(nameSpan);
+        el.appendChild(argsSpan);
+        el.appendChild(cursorSpan);
+        container.appendChild(el);
+
+        for (const char of line.name) {
+          nameSpan.textContent += char;
+          await delay(40);
+        }
+
+        if (line.args) {
+          for (const char of line.args) {
+            argsSpan.textContent += char;
+            await delay(40);
+          }
+        }
+
+        cursorSpan.remove();
+        await delay(200);
+        continue;
+      }
+
+      if (line.type === 'out') {
+        await delay(50);
+        const el = document.createElement('div');
+        el.className = 'line output';
+        el.innerHTML = line.html;
+        container.appendChild(el);
+        continue;
+      }
+    }
+
+    appendFinalPrompt(container);
+  }
+
+  function runInstant(container: HTMLElement): void {
+    for (const line of LINES) {
+      const el = document.createElement('div');
+      el.className = 'line';
+      if (line.type === 'blank') {
+        el.classList.add('blank');
+      } else if (line.type === 'out') {
+        el.classList.add('output');
+        el.innerHTML = line.html;
+      } else {
+        el.innerHTML =
+          '<span class="prompt">$ </span>' +
+          '<span class="cmd-name">' + line.name + '</span>' +
+          '<span class="cmd-args">' + (line.args ?? '') + '</span>';
+      }
+      container.appendChild(el);
+    }
+    appendFinalPrompt(container);
+  }
+
+  function init(): void {
+    const terminal = document.getElementById('about-terminal');
+    const content = document.getElementById('about-terminal-content');
+    if (!terminal || !content) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduced) {
+      runInstant(content);
+      return;
+    }
+
+    let played = false;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !played) {
+          played = true;
+          observer.disconnect();
+          runAnimated(content);
+        }
+      },
+      { threshold: 0.3 },
+    );
+    observer.observe(terminal);
+  }
+
+  init();
+  document.addEventListener('astro:after-swap', init);
+</script>
+
+<style>
+  /* === Static template elements — scoped styles work fine here === */
+
+  .terminal {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .terminal-bar {
+    height: 36px;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .terminal-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-red    { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green  { background: #28c840; }
+
+  .terminal-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: #666;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .terminal-body {
+    background: #0d0d0d;
+    padding: 16px 20px;
+    overflow: hidden;
+  }
+
+  .terminal-content {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  /*
+   * === Dynamically-created elements ===
+   * Elements built via document.createElement() in <script> do NOT receive
+   * Astro's scope attribute, so scoped CSS never matches them.
+   * Fix: scope under the terminal's unique ID using :global().
+   */
+
+  :global(#about-terminal-content .line) {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    min-height: 1.65em;
+  }
+
+  :global(#about-terminal-content .line.blank) {
+    min-height: 0;
+    height: 0.6em;
+  }
+
+  /* Prompt $ sign */
+  :global(#about-terminal-content .prompt) {
+    color: #E8A838;
+  }
+
+  /* Command keyword: cat, git, whoami — amber */
+  :global(#about-terminal-content .cmd-name) {
+    color: #E8A838;
+  }
+
+  /* Command arguments: flags, filenames, pipes — white */
+  :global(#about-terminal-content .cmd-args) {
+    color: #e8e8e8;
+  }
+
+  /* Output line base — muted gray */
+  :global(#about-terminal-content .output) {
+    color: #888888;
+  }
+
+  /* Amber for hashes, task IDs, keywords (feat/fix), identifiers */
+  :global(#about-terminal-content .accent) {
+    color: #E8A838;
+  }
+
+  /* Bright white for important values (names, keys) */
+  :global(#about-terminal-content .hi) {
+    color: #e8e8e8;
+  }
+
+  /* Blinking cursor */
+  :global(#about-terminal-content .cursor) {
+    color: #E8A838;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 50%   { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(#about-terminal-content .cursor) {
+      animation: none;
+      opacity: 1;
+    }
+  }
+</style>

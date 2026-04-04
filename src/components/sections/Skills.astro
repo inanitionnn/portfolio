@@ -18,8 +18,10 @@ import { skillsConfig } from '@/config/site';
           </div>
           <div class="tier-pills">
             {tier.skills.map((s) => (
-              <span class={`tag tier-tag tier-tag--${tier.tier.toLowerCase()}`}>
-                {s}
+              <span class="tier-tag-wrapper">
+                <span class={`tag tier-tag tier-tag--${tier.tier.toLowerCase()}`}>
+                  <span class="tier-tag-text">{s}</span>
+                </span>
               </span>
             ))}
           </div>
@@ -96,9 +98,43 @@ import { skillsConfig } from '@/config/site';
     gap: 6px;
   }
 
+  .tier-tag-wrapper {
+    display: inline-block;
+    perspective: 600px;
+    cursor: default;
+  }
+
+  .tier-tag {
+    display: inline-block;
+    transition:
+      transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+      background 0.45s ease,
+      box-shadow 0.45s ease;
+    transform-style: preserve-3d;
+  }
+
+  .tier-tag-text {
+    display: inline-block;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tier-tag-wrapper:hover .tier-tag {
+    transform: rotateX(180deg) scale(1.08);
+  }
+
+  /* Counter-rotate text so it stays readable after the flip */
+  .tier-tag-wrapper:hover .tier-tag-text {
+    transform: rotateX(180deg);
+  }
+
   .tier-tag--core {
     background: rgba(232, 168, 56, 0.1);
     color: var(--accent);
+  }
+
+  .tier-tag-wrapper:hover .tier-tag--core {
+    background: rgba(232, 168, 56, 0.22);
+    box-shadow: 0 0 10px rgba(232, 168, 56, 0.4), 0 0 22px rgba(232, 168, 56, 0.15);
   }
 
   .tier-tag--proficient {
@@ -106,14 +142,29 @@ import { skillsConfig } from '@/config/site';
     color: #61afef;
   }
 
+  .tier-tag-wrapper:hover .tier-tag--proficient {
+    background: rgba(97, 175, 239, 0.2);
+    box-shadow: 0 0 10px rgba(97, 175, 239, 0.4), 0 0 22px rgba(97, 175, 239, 0.15);
+  }
+
   .tier-tag--familiar {
     background: rgba(136, 136, 136, 0.08);
     color: var(--text-secondary);
   }
 
+  .tier-tag-wrapper:hover .tier-tag--familiar {
+    background: rgba(136, 136, 136, 0.18);
+    box-shadow: 0 0 10px rgba(136, 136, 136, 0.35), 0 0 22px rgba(136, 136, 136, 0.12);
+  }
+
   .tier-tag--learning {
     background: rgba(152, 195, 121, 0.08);
     color: #98c379;
+  }
+
+  .tier-tag-wrapper:hover .tier-tag--learning {
+    background: rgba(152, 195, 121, 0.2);
+    box-shadow: 0 0 10px rgba(152, 195, 121, 0.4), 0 0 22px rgba(152, 195, 121, 0.15);
   }
 
 </style>

@@ -1,5 +1,17 @@
 ---
 import { languagesConfig } from '@/config/site';
+
+function cefrToSegments(level: string): number {
+  const s = level.toLowerCase();
+  if (s.startsWith('native')) return 6;
+  if (s.startsWith('c2'))     return 6;
+  if (s.startsWith('c1'))     return 5;
+  if (s.startsWith('b2'))     return 4;
+  if (s.startsWith('b1'))     return 3;
+  if (s.startsWith('a2'))     return 2;
+  if (s.startsWith('a1'))     return 1;
+  return 0;
+}
 ---
 
 <section id="languages">
@@ -9,21 +21,69 @@ import { languagesConfig } from '@/config/site';
 
     <div class="lang-card fade-in">
       <div class="lang-list">
-        {languagesConfig.map((lang) => (
-          <div class="lang-entry">
-            <div class="lang-left">
-              <span class="lang-name">{lang.language}</span>
-              {lang.note && (
-                <span class="lang-note">{lang.note}</span>
-              )}
+        {languagesConfig.map((lang) => {
+          const filled = cefrToSegments(lang.level);
+          return (
+            <div class="lang-entry">
+              <div class="lang-left">
+                <span class="lang-name">{lang.language}</span>
+                {lang.note && (
+                  <span class="lang-note">{lang.note}</span>
+                )}
+                <div class="level-bar">
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <span
+                      class="level-segment"
+                      data-should-fill={i < filled ? 'true' : undefined}
+                    />
+                  ))}
+                </div>
+              </div>
+              <span class="lang-level">{lang.level}</span>
             </div>
-            <span class="lang-level">{lang.level}</span>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  function init(): void {
+    const section = document.getElementById('languages');
+    if (!section) return;
+
+    const segments = Array.from(
+      section.querySelectorAll<HTMLElement>('[data-should-fill="true"]'),
+    );
+    if (segments.length === 0) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduced) {
+      segments.forEach(el => el.classList.add('filled'));
+      return;
+    }
+
+    let played = false;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !played) {
+          played = true;
+          observer.disconnect();
+          segments.forEach((el, i) => {
+            setTimeout(() => el.classList.add('filled'), i * 80);
+          });
+        }
+      },
+      { threshold: 0.3 },
+    );
+    observer.observe(section);
+  }
+
+  init();
+  document.addEventListener('astro:after-swap', init);
+</script>
 
 <style>
   .lang-card {
@@ -43,7 +103,7 @@ import { languagesConfig } from '@/config/site';
   .lang-entry {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 14px 0;
     border-bottom: 1px solid var(--border);
   }
@@ -80,5 +140,34 @@ import { languagesConfig } from '@/config/site';
     font-size: 0.78rem;
     color: var(--accent);
     white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  /* Level bar */
+  .level-bar {
+    display: flex;
+    gap: 3px;
+    margin-top: 8px;
+  }
+
+  .level-segment {
+    width: 40px;
+    height: 6px;
+    border-radius: 2px;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .level-segment.filled {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 639px) {
+    .level-segment {
+      width: 32px;
+    }
   }
 </style>
