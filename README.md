@@ -1,6 +1,6 @@
 # portfolio — tarasiuk.site
 
-Personal portfolio website for [Oleksandr Tarasiuk](https://tarasiuk.site/), a backend engineer specialising in distributed systems, event-driven architectures, and FinTech infrastructure.
+Personal portfolio website for [Oleksandr Tarasiuk](https://tarasiuk.site/), a full stack engineer (backend-focused) specialising in distributed systems, event-driven architectures, and FinTech infrastructure.
 
 Built with **Astro 6** and deployed as a static site served by nginx inside Docker.
 
