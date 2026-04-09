@@ -78,8 +78,7 @@ import { contactConfig, siteConfig } from '@/config/site';
 <style>
   .contact-inner {
     max-width: 560px;
-    margin: 0 auto;
-    text-align: center;
+    text-align: left;
   }
 
   .contact-email {
@@ -110,7 +109,7 @@ import { contactConfig, siteConfig } from '@/config/site';
 
   .social-links {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 24px;
     margin: 24px 0 32px;
   }
@@ -122,6 +121,11 @@ import { contactConfig, siteConfig } from '@/config/site';
 
   .social-links a:hover {
     color: var(--accent);
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .sr-only {

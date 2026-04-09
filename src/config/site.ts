@@ -4,7 +4,7 @@ export const siteConfig = {
   name: 'Oleksandr Tarasiuk',
   title: 'Full Stack Engineer',
   tagline: 'Full Stack Engineer · Backend-focused',
-  location: 'Kyiv, Ukraine · Available for relocation to Germany · EU Blue Card eligible (Summer 2026)',
+  location: 'Kyiv, Ukraine · Available for relocation · EU Blue Card eligible (Summer 2026)',
   bio: 'Full Stack Engineer with 2.5+ years building production Node.js/NestJS systems in fintech and automotive domains. Backend-focused: microservice architecture, event-driven pipelines (Kafka, RabbitMQ), and multi-database environments under real load.',
   siteUrl: 'https://tarasiuk.site/',
   ogImageVersion: 3,
